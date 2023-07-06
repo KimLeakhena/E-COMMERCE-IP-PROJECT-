@@ -3,10 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors')
 const app = express();
 
-app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true
-}))
+app.use(cors("*"))
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -30,5 +27,5 @@ app.use((err, req, res, next) => {
 })
 
 
-app.listen(process.env.PORT || 3001, () => console.log('App avaiable on http://139.162.3.208:1020'))
+app.listen(process.env.PORT || 3000, () => console.log('App avaiable on http://139.162.3.208:1020'))
 
