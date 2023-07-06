@@ -30,5 +30,5 @@ app.use((err, req, res, next) => {
 })
 
 
-app.listen(process.env.PORT || 3001, () => console.log('App avaiable on http://localhost:3001'))
+app.listen(process.env.PORT || 3001, () => console.log('App avaiable on http://139.162.3.208:1020'))
 

@@ -1,6 +1,6 @@
 var category = {
   async create({ name, desc, imageUrl }) {
-    const res = await fetch("http://localhost:3001/category/create", {
+    const res = await fetch("http://139.162.3.208:1020/category/create", {
       method: "POST",
       credentials: "include",
       headers: {
@@ -13,7 +13,7 @@ var category = {
     return result;
   },
   async all() {
-    const res = await fetch("http://localhost:3001/category/categorized-items", {
+    const res = await fetch("http://139.162.3.208:1020/category/categorized-items", {
       method: "GET",
       credentials: "include",
       headers: {

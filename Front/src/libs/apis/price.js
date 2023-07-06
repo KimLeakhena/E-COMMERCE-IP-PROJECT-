@@ -1,6 +1,6 @@
 var price = {
   async add({ price, source, product }) {
-    const res = await fetch("http://localhost:3001/price/create", {
+    const res = await fetch("http://139.162.3.208:1020/price/create", {
       method: "POST",
       credentials: "include",
       headers: {

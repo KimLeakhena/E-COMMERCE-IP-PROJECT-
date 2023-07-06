@@ -1,6 +1,6 @@
 var item = {
   async create({ name, desc, category }) {
-    const res = await fetch("http://localhost:3001/item/create", {
+    const res = await fetch("http://139.162.3.208:1020/item/create", {
       method: "POST",
       credentials: "include",
       headers: {
@@ -13,7 +13,7 @@ var item = {
     return result;
   },
   async all() {
-    const res = await fetch("http://localhost:3001/item/all", {
+    const res = await fetch("http://139.162.3.208:1020/item/all", {
       method: "GET",
       credentials: "include",
       headers: {

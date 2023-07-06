@@ -77,7 +77,7 @@ export default{
   },methods: {
     async onSubmit(e) {
       e.preventDefault();
-      const res = await fetch("http://localhost:3001/auth/login", {
+      const res = await fetch("http://139.162.3.208:1020/auth/login", {
         method: "POST",
         credentials: "include",
         headers: {
