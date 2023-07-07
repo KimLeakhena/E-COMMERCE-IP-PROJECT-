@@ -2,7 +2,7 @@ var auth = {
   async getMe() {
     const res = await fetch("https://api.ahna.store/auth/me", {
       method: "GET",
-      credentials: "include",
+ 
       headers: {
         "Content-type": "application/json",
 
@@ -16,7 +16,7 @@ var auth = {
   async logout() {
     const res = await fetch("https://api.ahna.store/auth/logout", {
       method: "POST",
-      credentials: "include",
+ 
       headers: {
         "Content-type": "application/json",
 

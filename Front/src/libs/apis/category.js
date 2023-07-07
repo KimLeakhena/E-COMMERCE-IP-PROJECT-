@@ -2,7 +2,7 @@ var category = {
   async create({ name, desc, imageUrl }) {
     const res = await fetch("http://139.162.3.208:1020/category/create", {
       method: "POST",
-      credentials: "include",
+ 
       headers: {
         "Content-type": "application/json",
       },
@@ -15,7 +15,7 @@ var category = {
   async all() {
     const res = await fetch("hhttps://api.ahna.store/category/categorized-items", {
       method: "GET",
-      credentials: "include",
+ 
       headers: {
         "Content-type": "application/json",
        

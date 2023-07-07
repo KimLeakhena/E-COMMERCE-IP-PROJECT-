@@ -79,7 +79,7 @@ export default{
       e.preventDefault();
       const res = await fetch("https://api.ahna.store/auth/login", {
         method: "POST",
-        credentials: "include",
+   
         headers: {
           "Content-type": "application/json",
         },

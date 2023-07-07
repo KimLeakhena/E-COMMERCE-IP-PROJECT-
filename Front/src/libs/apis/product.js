@@ -2,7 +2,7 @@ var product = {
   async create({ title, category, item, imageUrl, desc }) {
     const res = await fetch("https://api.ahna.store/product/create", {
       method: "POST",
-      credentials: "include",
+ 
       headers: {
         "Content-type": "application/json",
       },
@@ -15,7 +15,7 @@ var product = {
   async all() {
     const res = await fetch("https://api.ahna.store/product/all", {
       method: "GET",
-      credentials: "include",
+ 
       headers: {
         "Content-type": "application/json",
        
