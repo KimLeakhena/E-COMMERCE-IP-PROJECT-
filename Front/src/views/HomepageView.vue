@@ -62,14 +62,20 @@ import { RouterLink } from 'vue-router';
       
       <div class="w-[250px] h-auto text-white ">
         <div class=" w-[200px] h-[220px] object-cover flex bg-[#D9D9D9] rounded-md mx-auto ">
-          <img src="../assets/image/GD00095854.default.1.jpg"  alt="">
+          <RouterLink to="/checkout">
+            <img src="../assets/image/GD00095854.default.1.jpg"  alt="" class="h-full">
+          </RouterLink>
+          
         </div>
         <p>THE BOYZ - 2nd MINI ALBUM [THE START] (Platform Ver.) (Random Ver.)</p>
       </div>
       
       <div class="w-[250px] h-auto text-white " >
         <div class="  w-[200px] h-[220px]  object-cover  flex bg-[#D9D9D9]  rounded-md mx-auto ">
-        <img src="../assets/image/GD00081965.default.1.png">
+          <RouterLink to="/checkout">
+            <img src="../assets/image/GD00081965.default.1.png" alt="" class="h-full">
+          </RouterLink>
+       
         </div>
         <p><p>KINO - Special Single [POSE] (Platform Ver.)</p></p>
       </div>
@@ -84,7 +90,10 @@ import { RouterLink } from 'vue-router';
       </div>
       <div class="w-[250px] h-auto text-white">
         <div class=" w-[200px] h-[220px] object-cover flex  bg-[#D9D9D9] rounded-md mx-auto  ">
-        <img src="../assets/image/GD00096254.default.1.jpg">
+          <RouterLink to="/checkout">
+            <img src="../assets/image/GD00096254.default.1.jpg" alt="" class="h-full">
+          </RouterLink>
+       
         </div>
         <p>
           NCT DREAM - The 3rd Album [ISTJ] (Photobook Ver.) (Random Ver.)
@@ -92,7 +101,10 @@ import { RouterLink } from 'vue-router';
       </div>
       <div class="w-[250px] h-auto text-white">
         <div class=" w-[200px] h-[220px] object-cover flex  bg-[#D9D9D9] rounded-md mx-auto  ">
-        <img src="../assets/image/GD00095848.default.1.png">
+          <RouterLink to="/checkout">
+            <img src="../assets/image/GD00095848.default.1.png" alt="" class="h-full">
+          </RouterLink>
+       
         </div>
         <p>
           THE BOYZ - 3rd MINI ALBUM [THE ONLY] (Platform Ver.) (Random Ver.)
@@ -100,7 +112,10 @@ import { RouterLink } from 'vue-router';
       </div>
       <div class="w-[250px] h-auto  text-white">
         <div class=" w-[200px] h-[220px] object-cover flex  bg-[#D9D9D9] rounded-md mx-auto  ">
-        <img src="../assets/image/GD00095377.default.1.png">
+          <RouterLink to="/checkout">
+            <img src="../assets/image/GD00095377.default.1.png" alt="" class="h-full">
+          </RouterLink>
+       
         </div>
         <p>
           SHINee - The 8th Album [HARD] (Photo Book Ver.) (Random Ver.)
@@ -108,7 +123,10 @@ import { RouterLink } from 'vue-router';
       </div>
       <div class="w-[250px] h-auto text-white">
         <div class=" w-[200px] h-[220px] flex  bg-[#D9D9D9] rounded-md mx-auto  ">
-        <img src="../assets/image/GD00096378.default.1.jpg" class="object-cover">
+          <RouterLink to="/checkout">
+            <img src="../assets/image/GD00096378.default.1.jpg" class="object-cover">
+          </RouterLink>
+       
         </div>
         <p>
           REN - The 1st Mini Album [Ren'dezvous] (Photobook) (Random Ver.)

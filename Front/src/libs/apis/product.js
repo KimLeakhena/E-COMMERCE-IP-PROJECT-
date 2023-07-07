@@ -1,6 +1,6 @@
 var product = {
   async create({ title, category, item, imageUrl, desc }) {
-    const res = await fetch("http://139.162.3.208:1020/product/create", {
+    const res = await fetch("https://api.ahna.store/product/create", {
       method: "POST",
       credentials: "include",
       headers: {
@@ -13,7 +13,7 @@ var product = {
     return result;
   },
   async all() {
-    const res = await fetch("http://139.162.3.208:1020/product/all", {
+    const res = await fetch("https://api.ahna.store/product/all", {
       method: "GET",
       credentials: "include",
       headers: {

@@ -11,8 +11,13 @@ import { RouterLink } from 'vue-router';
           <li class="cursor-pointer w-full flex justify-center items-center"><a href="">Album</a></li>
           <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">lightstick</a></li>
           <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">Merch</a></li>
-          <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">logout</a></li>
-          <li  class="  cursor-pointer w-full flex justify-center items-center"><a href="">Signup</a></li>
+          <!-- <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">logout</a></li>
+          <li  class="  cursor-pointer w-full flex justify-center items-center"><a href="">Signup</a></li> -->
+          <li class=" relative  px-4 w-full  flex justify-center items-center">
+            <!-- <div class="absolute"> -->
+            <img alt="..." src="../assets/image/gunwook.jpg" class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px">
+           <!-- </div> -->
+        </li>
           
         </ul>
       </div>
@@ -21,7 +26,7 @@ import { RouterLink } from 'vue-router';
       <!-- forbacktohome -->
       <!-- bg-[#e0e7ff] -->
       <div class="flex gap-6 mx-5 my-5 text-xl  ">
-        <RouterLink to="/">
+        <RouterLink to="/homepage">
           <p>Home</p>
         </RouterLink>
         <i class="fa-solid fa-forward" style="color: #7f72b1;padding-top:4px ;"></i>

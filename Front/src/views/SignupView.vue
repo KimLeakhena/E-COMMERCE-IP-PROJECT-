@@ -100,7 +100,7 @@ export default {
   methods: {
     async onSubmit(e) {
       e.preventDefault();
-      const res = await fetch("http://139.162.3.208:1020/auth/register", {
+      const res = await fetch("https://api.ahna.store/auth/register", {
         method: "POST",
         headers: {
           "Content-type": "application/json",

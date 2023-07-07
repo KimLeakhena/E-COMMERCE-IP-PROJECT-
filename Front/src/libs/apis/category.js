@@ -13,7 +13,7 @@ var category = {
     return result;
   },
   async all() {
-    const res = await fetch("http://139.162.3.208:1020/category/categorized-items", {
+    const res = await fetch("hhttps://api.ahna.store/category/categorized-items", {
       method: "GET",
       credentials: "include",
       headers: {

@@ -13,7 +13,7 @@ var item = {
     return result;
   },
   async all() {
-    const res = await fetch("http://139.162.3.208:1020/item/all", {
+    const res = await fetch("https://api.ahna.store/item/all", {
       method: "GET",
       credentials: "include",
       headers: {

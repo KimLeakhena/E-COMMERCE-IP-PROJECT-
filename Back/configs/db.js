@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 module.exports = async () => {
   try {
-    await mongoose.connect('mongodb://139.162.3.208:1020/ecommerce', {
+    await mongoose.connect('mongodb://170.187.231.28:1020/ecommerce', {
       autoIndex: true,
       serverSelectionTimeoutMS: 30000 // default 30 seconds
     });
