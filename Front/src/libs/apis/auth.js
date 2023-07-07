@@ -5,7 +5,7 @@ var auth = {
       credentials: "include",
       headers: {
         "Content-type": "application/json",
-        Origin: "http://localhost:3000",
+
       },
     });
 
@@ -19,7 +19,7 @@ var auth = {
       credentials: "include",
       headers: {
         "Content-type": "application/json",
-        Origin: "http://localhost:3000",
+
       },
     });
 

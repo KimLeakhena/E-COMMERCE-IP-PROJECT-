@@ -18,7 +18,7 @@ var category = {
       credentials: "include",
       headers: {
         "Content-type": "application/json",
-        Origin: "http://localhost:3000",
+       
       },
     });
 

@@ -14,12 +14,20 @@ import { RouterLink } from 'vue-router';
           <li class="cursor-pointer w-full flex justify-center items-center"><a href="">Album</a></li>
           <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">lightstick</a></li>
           <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">Merch</a></li>
-          <li class=" relative  px-4 w-full  flex justify-center items-center">
-            <!-- <div class="absolute"> -->
+          <!-- <li class=" relative  px-4 w-full  flex justify-center items-center">
+            
             <img alt="..." src="../assets/image/gunwook.jpg" class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px">
-           <!-- </div> -->
+           
         </li>
+           -->
           
+    <li class="h-30 w-full checker-bg bg-black flex items-center justify-center  p-2 text-blue-500">
+      <div class=" my-4 w-20 h-20  bg-gray-100 rounded-full bg-cover  bg-center" style="background-image: url('https://images.pexels.com/photos/774731/pexels-photo-774731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+      </div>
+    </li>
+           
+
+
           
         </ul>
     </div>
