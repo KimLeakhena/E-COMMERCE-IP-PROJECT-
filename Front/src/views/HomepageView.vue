@@ -21,7 +21,7 @@ import { RouterLink } from 'vue-router';
         </li>
            -->
           
-    <li class="h-30 w-full checker-bg bg-black flex items-center justify-center  p-2 text-blue-500">
+    <li class="h-30 w-full checker-bg flex items-center justify-center  p-2 text-blue-500">
       <div class=" my-4 w-20 h-20  bg-gray-100 rounded-full bg-cover  bg-center" style="background-image: url('https://images.pexels.com/photos/774731/pexels-photo-774731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
       </div>
     </li>
