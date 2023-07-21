@@ -1,6 +1,6 @@
 var item = {
   async create({ name, desc, category }) {
-    const res = await fetch("http://139.162.3.208:1020/item/create", {
+    const res = await fetch("https://api.ahna.store/item/create", {
       method: "POST",
  
       headers: {

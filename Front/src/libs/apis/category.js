@@ -1,6 +1,6 @@
 var category = {
   async create({ name, desc, imageUrl }) {
-    const res = await fetch("http://139.162.3.208:1020/category/create", {
+    const res = await fetch("https://api.ahna.store/category/create", {
       method: "POST",
  
       headers: {
@@ -13,7 +13,7 @@ var category = {
     return result;
   },
   async all() {
-    const res = await fetch("hhttps://api.ahna.store/category/categorized-items", {
+    const res = await fetch("https://api.ahna.store/category/categorized-items", {
       method: "GET",
  
       headers: {

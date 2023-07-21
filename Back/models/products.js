@@ -12,10 +12,10 @@ var productSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'Items'
   },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'Users'
-  },
+  // user: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Users'
+  // },
   imageUrl: String,
   desc: String,
 }, {

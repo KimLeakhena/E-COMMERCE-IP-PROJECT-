@@ -26,9 +26,9 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
-      path: '/',
-      name: 'Product',
-      component: () => import('../views/Product.vue')
+      path: '/cart',
+      name: 'cart',
+      component: () => import('../views/Cart.vue')
     },
     {
       path: '/checkout',
@@ -69,6 +69,30 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/SignupView.vue')
+    },
+    {
+      path: '/album',
+      name: 'album',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/AlbumView.vue')
+    },
+    {
+      path: '/lightstick',
+      name: 'lightstick',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/LightstickView.vue')
+    },
+    {
+      path: '/merch',
+      name: 'merch',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/MerchView.vue')
     },
     {
       path: '/dashboard',
