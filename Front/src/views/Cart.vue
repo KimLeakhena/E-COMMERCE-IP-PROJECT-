@@ -1,7 +1,63 @@
 import { RouterLink } from 'vue-router';
 
 <template>
-	
+	<header class="h-20 w-full bg-[#826B9F] flex justify-center items-center" >
+      <div class="w-full flex justify-between items-center ">
+        <div class="h-20 w-20 relative">
+          <!-- <img src="../assets/image/kpop.png"> -->
+          <p class="text-5xl font-bold text-white">Choco</p>
+        </div>
+        <ul class="flex items-center gap-6 text-white text-2xl pr-2">
+          <RouterLink to="/album">
+            <li class="cursor-pointer w-full flex justify-center items-center"><a href="">Album</a></li>
+          </RouterLink>
+          <RouterLink to="/lightstick">
+            <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">lightstick</a></li>
+          </RouterLink>
+          <RouterLink to="/merch">
+            <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">Merch</a></li>
+          </RouterLink>
+          <RouterLink to="/Cart">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+            </svg></li>
+          </RouterLink>
+          <li class="h-30 w-full checker-bg flex items-center justify-center  p-2 text-blue-500">
+            <div  type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"  class=" my-4 w-14 h-14  cursor-pointer bg-gray-100 rounded-full bg-cover  bg-center">
+              <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="cursor-pointer"  src="../assets/image/userpf.png
+			  ">
+              
+              <!-- Dropdown menu -->
+              <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                  <!-- <div>Bonnie Green</div> -->
+                  <div class="font-medium truncate">Kim Leakhena</div>
+                </div>
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" >
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</a>
+                  </li>
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Order & reordering</a>
+                  </li>
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Address</a>
+                  </li>
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">settings</a>
+                  </li>
+                </ul>
+                <div class="py-1">
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Log out</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          
+        </ul>
+      </div>
+      
+    </header>
   
     <!-- cart -->
 	<div class="flex flex-col max-w-3xl p-6 space-y-4 sm:p-10 dark:bg-gray-900 dark:text-gray-100">

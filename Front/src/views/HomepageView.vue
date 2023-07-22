@@ -6,7 +6,6 @@
     <header class="h-20 w-full bg-[#826B9F] flex justify-center items-center" >
       <div class="w-full flex justify-between items-center ">
         <div class="h-20 w-20 relative">
-          <!-- <img src="../assets/image/kpop.png"> -->
           <p class="text-5xl font-bold text-white">Choco</p>
         </div>
         <ul class="flex items-center gap-6 text-white text-2xl pr-2">
@@ -101,96 +100,6 @@
 		</div>
 	</div>
 </div>
-     
-      
-      <!-- pic -->
-      <!-- <div class="flex flex-wrap p-6 justify-center">
-        <div class="w-[250px] h-auto text-white"  >
-          <div class="  w-[200px] h-[220px] object-cover flex bg-[#D9D9D9] rounded-md mx-auto ">
-            
-            <RouterLink to="/checkout">
-              <img src="../assets/image/GD00096418.default.1.png" class="h-full" >
-            </RouterLink>
-          </div>
-          <p>ZEROBASEONE - The 1st Mini Album
-            [YOUTH IN THE SHADE] (YOUTH Ver. + SHADE Ver.)</p>
-          </div>
-          
-          <div class="w-[250px] h-auto text-white ">
-            <div class=" w-[200px] h-[220px] object-cover flex bg-[#D9D9D9] rounded-md mx-auto ">
-              <RouterLink to="/checkout">
-                <img src="../assets/image/GD00095854.default.1.jpg"  alt="" class="h-full">
-              </RouterLink>
-              
-            </div>
-            <p>THE BOYZ - 2nd MINI ALBUM [THE START] (Platform Ver.) (Random Ver.)</p>
-          </div>
-          
-          <div class="w-[250px] h-auto text-white " >
-            <div class="  w-[200px] h-[220px]  object-cover  flex bg-[#D9D9D9]  rounded-md mx-auto ">
-              <RouterLink to="/checkout">
-                <img src="../assets/image/GD00081965.default.1.png" alt="" class="h-full">
-              </RouterLink>
-              
-            </div>
-            <p><p>KINO - Special Single [POSE] (Platform Ver.)</p></p>
-          </div>
-          
-          <div class="w-[250px] h-auto text-white">
-            <div class="  w-[200px] h-[220px] object-cover flex  bg-[#D9D9D9]   rounded-md mx-auto ">
-              <RouterLink to="/checkout">
-                <img src="../assets/image/GD00071809.default.1.png" class="h-full" >
-              </RouterLink>
-            </div>
-            <p> PENTAGON - Mini Album Vol.12 [IN:VITE U] (Nouveau Ver. + Flare Ver.)</p>
-          </div>
-          <div class="w-[250px] h-auto text-white">
-            <div class=" w-[200px] h-[220px] object-cover flex  bg-[#D9D9D9] rounded-md mx-auto  ">
-              <RouterLink to="/checkout">
-                <img src="../assets/image/GD00096254.default.1.jpg" alt="" class="h-full">
-              </RouterLink>
-              
-            </div>
-            <p>
-              NCT DREAM - The 3rd Album [ISTJ] (Photobook Ver.) (Random Ver.)
-            </p>
-          </div>
-          <div class="w-[250px] h-auto text-white">
-            <div class=" w-[200px] h-[220px] object-cover flex  bg-[#D9D9D9] rounded-md mx-auto  ">
-              <RouterLink to="/checkout">
-                <img src="../assets/image/GD00095848.default.1.png" alt="" class="h-full">
-              </RouterLink>
-              
-            </div>
-            <p>
-              THE BOYZ - 3rd MINI ALBUM [THE ONLY] (Platform Ver.) (Random Ver.)
-            </p>
-          </div>
-          <div class="w-[250px] h-auto  text-white">
-            <div class=" w-[200px] h-[220px] object-cover flex  bg-[#D9D9D9] rounded-md mx-auto  ">
-              <RouterLink to="/checkout">
-                <img src="../assets/image/GD00095377.default.1.png" alt="" class="h-full">
-              </RouterLink>
-              
-            </div>
-            <p>
-              SHINee - The 8th Album [HARD] (Photo Book Ver.) (Random Ver.)
-            </p>
-          </div>
-          <div class="w-[250px] h-auto text-white">
-            <div class=" w-[200px] h-[220px] flex  bg-[#D9D9D9] rounded-md mx-auto  ">
-              <RouterLink to="/checkout">
-                <img src="../assets/image/GD00096378.default.1.jpg" class="object-cover">
-              </RouterLink>
-              
-            </div>
-            <p>
-              REN - The 1st Mini Album [Ren'dezvous] (Photobook) (Random Ver.)
-            </p>
-          </div>
-          
-        </div> -->
-
 <section class="p-4 lg:p-8 dark:bg-gray-800 dark:text-gray-100">
 		<div class="container mx-auto space-y-12">
 			<div class="flex flex-col overflow-hidden rounded-md shadow-sm lg:flex-row">
