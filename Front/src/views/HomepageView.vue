@@ -10,6 +10,7 @@
           <p class="text-5xl font-bold text-white">Choco</p>
         </div>
         <ul class="flex items-center gap-6 text-white text-2xl pr-2">
+
           <RouterLink to="/album">
             <li class="cursor-pointer w-full flex justify-center items-center"><a href="">Album</a></li>
           </RouterLink>
