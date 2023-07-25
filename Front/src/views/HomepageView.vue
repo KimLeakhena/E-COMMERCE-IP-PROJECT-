@@ -10,8 +10,8 @@
         </div>
         <ul class="flex items-center gap-6 text-white text-2xl pr-2">
 
-          <RouterLink to="/album">
-            <li class="cursor-pointer w-full flex justify-center items-center"><a href="">Album</a></li>
+          <RouterLink to="/album"  >
+            <li class="cursor-pointer w-full flex justify-center items-center"  v-for="category in category.products" :key="category._id" ><a @click="findcategory(category._id)" >{{category.name}}</a></li>
           </RouterLink>
           <RouterLink to="/lightstick">
             <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">lightstick</a></li>
@@ -37,7 +37,7 @@
         
           <li class="h-30 w-full checker-bg flex items-center justify-center  p-2 text-blue-500">
             <div  type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"  class=" my-4 w-14 h-14  cursor-pointer bg-gray-100 rounded-full bg-cover  bg-center">
-              <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="cursor-pointer"  src="../assets/image/user (1).png">
+              <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="cursor-pointer"  src="../assets/image/userpf.png">
               
               <!-- Dropdown menu -->
               <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
@@ -59,9 +59,9 @@
                     <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">settings</a>
                   </li>
                 </ul>
-                <div  v-on:click="onLogout()" class="py-1">
+                <li  v-on:click="onLogout()" class="py-1">
                   <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Log out</a>
-                </div>
+                </li>
               </div>
             </div>
           </li>
@@ -94,7 +94,7 @@
 			</h2>
 			<div class="space-x-2 text-center py-2 lg:py-0">
 				<span>Plus free shipping! Use code:</span>
-				<span class="font-bold text-lg">MAMBA</span>
+				<span class="font-bold text-lg">ZEROBASEONE</span>
 			</div >
 			<a href="#" rel="noreferrer noopener" class="px-5 mt-4 lg:mt-0 py-3 rounded-md border block bg-[#826B9F] hover:bg-[#B0A3C0] text-white dark:border-gray-400">Shop Now</a>
 		</div>
@@ -105,10 +105,10 @@
 			<div class="flex flex-col overflow-hidden rounded-md shadow-sm lg:flex-row">
 				<img src="https://pbs.twimg.com/media/EWVS1vpU8AE8LAg.jpg" alt="" class="h-80 dark:bg-gray-500 aspect-video">
 				<div class="flex flex-col justify-center flex-1 p-6 dark:bg-gray-900">
-					<span class="text-xs uppercase dark:text-gray-400">Join, it's free</span>
+					<span class="text-xs uppercase dark:text-gray-400">new</span>
 					<h3 class="text-3xl font-bold">We're not reinventing the wheel</h3>
-					<p class="my-6 dark:text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor aliquam possimus quas, error esse quos.</p>
-					<button type="button" class="self-start">Action</button>
+					<p class="my-6 dark:text-gray-400">An Ode is the third studio album by South Korean boy band Seventeen.It was released on September 16, 2019, through Pledis Entertainment.The album spawned two singles, "Hit" was released as the album's lead single on August 5, 2019, followed by the title track, "Fear", on the release date of the album.</p>
+					<button type="button" class="self-start">see more</button>
 				</div>
 			</div>
        <!-- newrelease -->
@@ -127,7 +127,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
 
-            <button class="text-sm">Add to cart</button>
+            <!-- <button class="text-sm">Add to cart</button> -->
           </div>
         </div>
 
@@ -143,7 +143,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -173,8 +175,9 @@
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
-
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -190,7 +193,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
 
-            <button class="text-sm">Add to cart</button>
+            <!-- <button class="text-sm">Add to cart</button> -->
           </div>
         </div>
 
@@ -205,7 +208,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -221,7 +226,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
 
-            <button class="text-sm">Add to cart</button>
+            <!-- <button class="text-sm">Add to cart</button> -->
           </div>
         </div>
 
@@ -236,7 +241,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -251,7 +258,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
 
-            <button class="text-sm">Add to cart</button>
+            
           </div>
         </div>
 
@@ -266,7 +273,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -281,7 +290,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
 
-            <button class="text-sm">Add to cart</button>
+            
           </div>
         </div>
 
@@ -297,7 +306,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -312,7 +323,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
 
-            <button class="text-sm">Add to cart</button>
+            <!-- <button class="text-sm">Add to cart</button> -->
           </div>
         </div>
 
@@ -328,7 +339,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -343,7 +356,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
 
-            <button class="text-sm">Add to cart</button>
+            
           </div>
         </div>
 
@@ -359,7 +372,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -372,32 +387,32 @@
 			<div class="flex flex-col overflow-hidden rounded-md shadow-sm lg:flex-row-reverse">
 				<img src="https://kpoplat.com/wp-content/uploads/2021/06/treasure-lighstick-sold-out-kpoplat-750x450.png" alt="" class="h-80 dark:bg-gray-500 aspect-video">
 				<div class="flex flex-col justify-center flex-1 p-6 dark:bg-gray-900">
-					<span class="text-xs uppercase dark:text-gray-400">Join, it's free</span>
-					<h3 class="text-3xl font-bold">We're not reinventing the wheel</h3>
-					<p class="my-6 dark:text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor aliquam possimus quas, error esse quos.</p>
-					<button type="button" class="self-start">Action</button>
+					<span class="text-xs uppercase dark:text-gray-400">New</span>
+					<h3 class="text-3xl  font-bold">TREASURE Official Light Stick</h3>
+					<p class="my-6 dark:text-gray-400">The concept behind the light stick’s design is a “treasure box,” which is similar to the name of the survival show “YG Treasure Box” through which the group was created. At the top of the light stick is a jewel shape that symbolizes TREASURE and their fans TREASURE MAKER.</p>
+					<button type="button" class="self-start">Buy now</button>
 				</div>
 			</div>
   <div class=" m-auto px-6 py-40">
     <div class="flex flex-col md:flex-row items-center justify-between relative w-100 h-auto md:h-64 bg-100 shadow-2xl rounded-lg p-8">
       <div class="w-8/12 text-2xl">
-        <img alt="quote" class="float-left mr-1" src="https://assets-global.website-files.com/5b5a66e9f3166b36708705fa/5cf8fb1f994fb7168d0d66fb_quote-intro.svg">
-        <span class="flex">We are team of developers with houndreds hours spend on coding, we create professional apps, webs.</span>
+        <!-- <img class="float-left mr-1" src="https://assets-global.website-files.com/5b5a66e9f3166b36708705fa/5cf8fb1f994fb7168d0d66fb_quote-intro.svg"> -->
+        <span class="flex">"I think reaching the top is ambiguous in and of itself. Above the top is the sky, above that is the universe, and even above that there’s going to be something else. I always want to be growing, higher than the sky and the universe "</span>
       </div>
           <div class="relative shadow-md font-medium my-5 py-2 px-4 text-white cursor-pointer bg-yellow-600 hover:bg-yellow-500 rounded text-lg text-center w-48">
             <span class="absolute h-3 w-3 right-0 top-0 animate-ping inline-flex rounded-full h-3 w-3 bg-yellow-600">
             </span>
-            Call now
+            iKON’s Bobby
           </div>
     </div>
   </div>
 			<div class="flex flex-col overflow-hidden rounded-md shadow-sm lg:flex-row">
 				<img src="https://www.weverseshop.io/_next/image?url=https%3A%2F%2Fcdn-contents.weverseshop.io%2Fpublic%2Fshop%2F16dd9f0eac95eddb9d067035a45cea50.png&w=720&q=95" alt="" class="h-80 dark:bg-gray-500 aspect-video">
 				<div class="flex flex-col justify-center flex-1 p-6 dark:bg-gray-900">
-					<span class="text-xs uppercase dark:text-gray-400">Join, it's free</span>
-					<h3 class="text-3xl font-bold">We're not reinventing the wheel</h3>
-					<p class="my-6 dark:text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor aliquam possimus quas, error esse quos.</p>
-					<button type="button" class="self-start">Action</button>
+					<span class="text-xs uppercase dark:text-gray-400">New</span>
+					<h3 class="text-3xl font-bold">TREASURE</h3>
+					<p class="my-6 dark:text-gray-400">TREASURE has started pre-orders for their second full-length album, REBOOT, with a digipack and KiT versions. The digipack version has been prepared in various configurations, including a 20-page booklet for each member, a folding poster, a selfie photo card, a rare selfie photo card, and a QR lyric card.</p>
+					<button type="button" class="self-start">Buy now</button>
 				</div>
 			</div>
 		</div>
@@ -606,13 +621,14 @@ import { RouterLink, RouterView } from "vue-router";
 import { initFlowbite } from 'flowbite'
 import product from "../libs/apis/product";
 import category from "../libs/apis/category";
-import authApi from "../libs/apis/auth";
+import authApi from "@/libs/apis/auth";
+
 export default{
   async mounted() {},
   methods: {
     async onLogout() {
       const result = await authApi.logout();
-      if (result) this.$router.push({ name: "auth/login" });
+      if (result) this.$router.push({ name: "home" });
     },
   },
   components: {},

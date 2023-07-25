@@ -4,23 +4,70 @@ import { RouterLink } from 'vue-router';
     <!-- header -->
     <header class="h-20 w-full bg-[#826B9F] flex justify-center items-center" >
       <div class="w-full flex justify-between items-center ">
-        
-        <!-- <img class="block mx-1.5 my-1.5 h-20 rounded-full sm:mx-0 sm:shrink-0" src="../assets/image/chocoshop.PNG" alt="Woman's Face" /> -->
-        <p class="text-5xl font-bold text-white">Choco</p>
+        <div class="h-20 w-20 relative">
+          <p class="text-5xl font-bold text-white">Choco</p>
+        </div>
         <ul class="flex items-center gap-6 text-white text-2xl pr-2">
-          <li class="cursor-pointer w-full flex justify-center items-center"><a href="">Album</a></li>
-          <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">lightstick</a></li>
-          <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">Merch</a></li>
-          <!-- <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">logout</a></li>
-          <li  class="  cursor-pointer w-full flex justify-center items-center"><a href="">Signup</a></li> -->
-          <li class=" relative  px-4 w-full  flex justify-center items-center">
-            <!-- <div class="absolute"> -->
-            <img alt="..." src="../assets/image/gunwook.jpg" class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px">
-           <!-- </div> -->
-        </li>
+
+          <RouterLink to="/album">
+            <li class="cursor-pointer w-full flex justify-center items-center"><a href="">Album</a></li>
+          </RouterLink>
+          <RouterLink to="/lightstick">
+            <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">lightstick</a></li>
+          </RouterLink>
+          <RouterLink to="/merch">
+            <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">Merch</a></li>
+          </RouterLink>
+          <RouterLink to="/Cart">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+            </svg></li>
+          </RouterLink>
+            <li>
+              <div class="relative text-gray-600">
+                <input type="search" name="serch" placeholder="Search" class="bg-white h-10 px-5 pr-10 rounded-full text-sm focus:outline-none">
+                <button type="submit" class="absolute right-0 top-0 mt-3 mr-4">
+                  <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
+                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"/>
+                  </svg>
+                </button>
+              </div>
+            </li>
+        
+          <li class="h-30 w-full checker-bg flex items-center justify-center  p-2 text-blue-500">
+            <div  type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"  class=" my-4 w-14 h-14  cursor-pointer bg-gray-100 rounded-full bg-cover  bg-center">
+              <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="cursor-pointer"  src="../assets/image/userpf.png">
+              
+              <!-- Dropdown menu -->
+              <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                  <!-- <div>Bonnie Green</div> -->
+                  <div class="font-medium truncate">Kim Leakhena</div>
+                </div>
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" >
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</a>
+                  </li>
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Order & reordering</a>
+                  </li>
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Address</a>
+                  </li>
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">settings</a>
+                  </li>
+                </ul>
+                <!-- <div  v-on:click="onLogout()" class="py-1">
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Log out</a>
+                </div> -->
+              </div>
+            </div>
+          </li>
           
         </ul>
       </div>
+      
     </header>
     <main >
       <!-- forbacktohome -->
@@ -189,6 +236,7 @@ import { RouterLink } from 'vue-router';
 import { RouterLink, RouterView } from "vue-router";
 export default{
   mounted() {
+    initFlowbite();
     function myorder() {
       document.getElementById("demo").innerHTML = "Hello World";
     }

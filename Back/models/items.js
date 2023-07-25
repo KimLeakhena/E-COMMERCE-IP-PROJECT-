@@ -12,6 +12,7 @@ var itemsSchema = new mongoose.Schema({
     ref: 'Categories',
     required: true
   },
+  imageUrl: String,
   desc: String,
 }, {
   timestamps: true,

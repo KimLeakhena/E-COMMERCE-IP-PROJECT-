@@ -1,15 +1,16 @@
 import { RouterLink } from 'vue-router';
 
 
+
 <template>
     <body >
-        <header class="h-20 w-full bg-[#826B9F] flex justify-center items-center" >
+      <header class="h-20 w-full bg-[#826B9F] flex justify-center items-center" >
       <div class="w-full flex justify-between items-center ">
-       <div class="h-20 w-20 relative">
-         
-         <p class="text-5xl font-bold text-white">Choco</p>
-       </div>
+        <div class="h-20 w-20 relative">
+          <p class="text-5xl font-bold text-white">Choco</p>
+        </div>
         <ul class="flex items-center gap-6 text-white text-2xl pr-2">
+
           <RouterLink to="/album">
             <li class="cursor-pointer w-full flex justify-center items-center"><a href="">Album</a></li>
           </RouterLink>
@@ -18,15 +19,99 @@ import { RouterLink } from 'vue-router';
           </RouterLink>
           <RouterLink to="/merch">
             <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">Merch</a></li>
-          </RouterLink>     
+          </RouterLink>
+          <RouterLink to="/Cart">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+            </svg></li>
+          </RouterLink>
+            <li>
+              <div class="relative text-gray-600">
+                <input type="search" name="serch" placeholder="Search" class="bg-white h-10 px-5 pr-10 rounded-full text-sm focus:outline-none">
+                <button type="submit" class="absolute right-0 top-0 mt-3 mr-4">
+                  <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
+                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"/>
+                  </svg>
+                </button>
+              </div>
+            </li>
+        
           <li class="h-30 w-full checker-bg flex items-center justify-center  p-2 text-blue-500">
-            <div class=" my-4 w-20 h-20  bg-gray-100 rounded-full bg-cover  bg-center" style="background-image: url('https://images.pexels.com/photos/774731/pexels-photo-774731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+            <div  type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"  class=" my-4 w-14 h-14  cursor-pointer bg-gray-100 rounded-full bg-cover  bg-center">
+              <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="cursor-pointer"  src="../assets/image/userpf.png">
+              
+              <!-- Dropdown menu -->
+              <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                  <!-- <div>Bonnie Green</div> -->
+                  <div class="font-medium truncate">Kim Leakhena</div>
+                </div>
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" >
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</a>
+                  </li>
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Order & reordering</a>
+                  </li>
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Address</a>
+                  </li>
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">settings</a>
+                  </li>
+                </ul>
+                <div  v-on:click="onLogout()" class="py-1">
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Log out</a>
+                </div>
+              </div>
             </div>
-           </li> 
+          </li>
+          
         </ul>
-    </div>
-        </header>
+      </div>
+      
+    </header>
     <main>
+      <div class="w-full bg-[#ede9fe]" style="background-image: url(' '); background-position: center center; background-blend-mode: multiply; background-size: cover;">
+	<div class="container flex flex-col flex-wrap content-center justify-center p-4 py-20 mx-auto md:p-10">
+		<h1 class="text-5xl antialiased font-semibold leadi text-center dark:text-gray-100">Get Our Updates</h1>
+		<p class="pt-2 pb-8 text-xl antialiased text-center dark:text-gray-100">Find out about events and other news</p>
+    <div class="flex items-center p-6 space-x-6 rounded-xl ">
+     
+      <div class="relative text-gray-600">
+                <input 
+                
+                name="serch" 
+                placeholder="Search" 
+                class="bg-white h-10 px-5 pr-10 rounded-full text-sm focus:outline-none">
+                <div>
+
+                </div>
+                <button type="submit" 
+                class="absolute right-0 top-0 mt-3 mr-4">
+                  <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
+                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"/>
+                  </svg>
+                </button>
+              </div>
+      <!-- <div class="flex py-3 px-4 rounded-lg text-black font-semibold cursor-pointer"> -->
+           <select
+              required
+              v-model="itemId"
+              name="item"
+              class="flex  py-3 px-4 rounded-lg text-black font-semibold cursor-pointer"
+            >
+            
+              <option @click="onSubmit" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" v-for="item in items" :key="item.name" :value="item._id">
+                <img class="w-4 h-4 mr-2 rounded-full"  :src="item.imageUrl" >
+                {{ item.name }}
+              </option>
+            </select>
+      </div>
+      
+    </div>
+	</div>
+<!-- </div> -->
 <!-- Title -->
 <div class="pt-32  bg-white">
 <h1 class="text-center text-2xl font-bold text-gray-800">All Products</h1>
@@ -63,6 +148,40 @@ import { RouterLink } from 'vue-router';
 </div>
 
 <!-- Product List -->
+<section class="py-10 bg-gray-100">
+  <div class="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <article v-for="product in products" :key="product._id" class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
+      <a href="#">
+        <div class="relative flex items-end overflow-hidden rounded-xl">
+          <img :src="product.imageUrl" alt="Hotel Photo" />
+          <div class="flex items-center space-x-1.5 rounded-lg bg-[#826B9F] hover:bg-[#B0A3C0] px-4 py-1.5 text-white duration-100 ">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+            </svg>
+          </div>
+        </div>
+        <div class="mt-1 p-2">
+          <h2 class="text-slate-700">{{first_product}}</h2>
+          <p class="mt-1 text-sm text-slate-400">{{product.desc}}</p>
+
+          <div class="mt-3 flex items-end justify-between">
+              <p class="text-lg font-bold text-[#826B9F]">{{product.price}}$</p>
+
+            <div class="flex items-center space-x-1.5 rounded-lg bg-[#826B9F] hover:bg-[#B0A3C0] px-4 py-1.5 text-white duration-100 ">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+              </svg>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
+            </div>
+          </div>
+        </div>
+      </a>
+    </article>
+  </div>
+
+</section>
 <section class="py-10 bg-gray-100">
   <div class="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
     <article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
@@ -126,7 +245,10 @@ import { RouterLink } from 'vue-router';
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Order</button>
+              <!-- <button class="text-sm">Order</button> -->
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -142,7 +264,7 @@ import { RouterLink } from 'vue-router';
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
 
-            <button class="text-sm">Add to cart</button>
+            <!-- <button class="text-sm">Add to cart</button> -->
           </div>
         </div>
 
@@ -157,7 +279,9 @@ import { RouterLink } from 'vue-router';
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -173,7 +297,7 @@ import { RouterLink } from 'vue-router';
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
 
-            <button class="text-sm">Add to cart</button>
+            <!-- <button class="text-sm">Add to cart</button> -->
           </div>
         </div>
 
@@ -188,7 +312,10 @@ import { RouterLink } from 'vue-router';
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <!-- <button class="text-sm">Add to cart</button> -->
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -203,7 +330,7 @@ import { RouterLink } from 'vue-router';
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
 
-            <button class="text-sm">Add to cart</button>
+            <!-- <button class="text-sm">Add to cart</button> -->
           </div>
         </div>
 
@@ -218,7 +345,9 @@ import { RouterLink } from 'vue-router';
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -233,7 +362,7 @@ import { RouterLink } from 'vue-router';
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
 
-            <button class="text-sm">Add to cart</button>
+            <!-- <button class="text-sm">Add to cart</button> -->
           </div>
         </div>
 
@@ -249,7 +378,9 @@ import { RouterLink } from 'vue-router';
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -258,13 +389,13 @@ import { RouterLink } from 'vue-router';
     <article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
       <a href="#">
         <div class="relative flex items-end overflow-hidden rounded-xl">
-          <img src=" https://www.ktown4u.com/goods_files/SH0164/goods_images/000082/GD00081921.default.3.png" alt="Hotel Photo" />
+          <img src=" https://www.ktown4u.com/goods_files/SH0164/goods_images/000098/GD00097343.default.1.jpg" alt="Hotel Photo" />
           <div class="flex items-center space-x-1.5 rounded-lg bg-[#826B9F] hover:bg-[#B0A3C0] px-4 py-1.5 text-white duration-100 ">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
 
-            <button class="text-sm">Add to cart</button>
+            <!-- <button class="text-sm">Add to cart</button> -->
           </div>
         </div>
 
@@ -280,7 +411,9 @@ import { RouterLink } from 'vue-router';
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -295,7 +428,7 @@ import { RouterLink } from 'vue-router';
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
 
-            <button class="text-sm">Add to cart</button>
+            <!-- <button class="text-sm">Add to cart</button> -->
           </div>
         </div>
 
@@ -311,7 +444,9 @@ import { RouterLink } from 'vue-router';
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -363,6 +498,39 @@ import { RouterLink } from 'vue-router';
 
 <script >
 import { RouterLink,RouterView } from 'vue-router';
+import categoryApi from "@/libs/apis/category";
+import itemApi from "@/libs/apis/item";
+import productApi from "@/libs/apis/product";
+
+
+export default{
+  
+        data() {
+          return {
+      categories: [],
+      items: [],
+      products: [],
+      title: "",
+      imageUrl: "",
+      desc: "",
+      categoryId: "",
+      itemId: "",
+      priceModalShown: false,
+      selectedProduct: null,
+      price: "",
+      source: "",
+      first_product:"",
+    };
+        },
+    async mounted() {
+    const first_product= this.products[0];
+    this.categories = await categoryApi.all();
+    this.items = await itemApi.all();
+    this.products = await productApi.all();
+    initFlowbite();
+  },
+
+};
 
 
 </script>

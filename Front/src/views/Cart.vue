@@ -202,6 +202,8 @@ import { RouterLink } from 'vue-router';
 	import { RouterLink, RouterView } from "vue-router";
 	export default{
 		mounted(){
+			initFlowbite();
+
 			const element = document.getElementById("2");
                   element.remove();
 		}

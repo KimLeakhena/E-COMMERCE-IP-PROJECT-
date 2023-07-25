@@ -2,13 +2,13 @@
 
 <template>
     <body>
-        <header class="h-20 w-full bg-[#826B9F] flex justify-center items-center" >
+      <header class="h-20 w-full bg-[#826B9F] flex justify-center items-center" >
       <div class="w-full flex justify-between items-center ">
-       <div class="h-20 w-20 relative">
-         
-         <p class="text-5xl font-bold text-white">Choco</p>
-       </div>
+        <div class="h-20 w-20 relative">
+          <p class="text-5xl font-bold text-white">Choco</p>
+        </div>
         <ul class="flex items-center gap-6 text-white text-2xl pr-2">
+
           <RouterLink to="/album">
             <li class="cursor-pointer w-full flex justify-center items-center"><a href="">Album</a></li>
           </RouterLink>
@@ -18,39 +18,80 @@
           <RouterLink to="/merch">
             <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">Merch</a></li>
           </RouterLink>
+          <RouterLink to="/Cart">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+            </svg></li>
+          </RouterLink>
+            <li>
+              <div class="relative text-gray-600">
+                <input type="search" name="serch" placeholder="Search" class="bg-white h-10 px-5 pr-10 rounded-full text-sm focus:outline-none">
+                <button type="submit" class="absolute right-0 top-0 mt-3 mr-4">
+                  <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
+                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"/>
+                  </svg>
+                </button>
+              </div>
+            </li>
+        
           <li class="h-30 w-full checker-bg flex items-center justify-center  p-2 text-blue-500">
-            <div class=" my-4 w-20 h-20  bg-gray-100 rounded-full bg-cover  bg-center" style="background-image: url('https://images.pexels.com/photos/774731/pexels-photo-774731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+            <div  type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"  class=" my-4 w-14 h-14  cursor-pointer bg-gray-100 rounded-full bg-cover  bg-center">
+              <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="cursor-pointer"  src="../assets/image/userpf.png">
+              
+              <!-- Dropdown menu -->
+              <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                  <!-- <div>Bonnie Green</div> -->
+                  <div class="font-medium truncate">Kim Leakhena</div>
+                </div>
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" >
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</a>
+                  </li>
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Order & reordering</a>
+                  </li>
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Address</a>
+                  </li>
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">settings</a>
+                  </li>
+                </ul>
+                <!-- <div  v-on:click="onLogout()" class="py-1">
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Log out</a>
+                </div> -->
+              </div>
             </div>
-           </li> 
+          </li>
+          
         </ul>
-    </div>
-        </header>
+      </div>
+      
+    </header>
     <main>
-      <div class="w-full bg-gray-500" style="background-image: url(' '); background-position: center center; background-blend-mode: multiply; background-size: cover;">
+      <div class="w-full bg-[#ede9fe]" style="background-image: url(' '); background-position: center center; background-blend-mode: multiply; background-size: cover;">
 	<div class="container flex flex-col flex-wrap content-center justify-center p-4 py-20 mx-auto md:p-10">
 		<h1 class="text-5xl antialiased font-semibold leadi text-center dark:text-gray-100">Get Our Updates</h1>
 		<p class="pt-2 pb-8 text-xl antialiased text-center dark:text-gray-100">Find out about events and other news</p>
-		<!-- <div class="flex flex-row">
-			<input type="search" placeholder="example@email.com" class="w-3/5 p-3 rounded-l-lg sm:w-2/3" spellcheck="false" data-ms-editor="true">
-			<button type="button" class="w-2/5 p-3 font-semibold rounded-r-lg sm:w-1/3 dark:bg-violet-400 dark:text-gray-900">Subscribe</button>
-		</div> -->
-    <div class="flex items-center p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
-      <div class="flex bg-gray-100 p-4 w-72 space-x-4 rounded-lg">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-        <input class="bg-gray-100 outline-none" type="text" placeholder="search...." />
-      </div>
-      <div class="flex py-3 px-4 rounded-lg text-gray-500 font-semibold cursor-pointer">
+    <div class="flex items-center p-6 space-x-6 rounded-xl ">
+     
+      <div class="relative text-gray-600">
+                <input type="search" name="serch" placeholder="Search" class="bg-white h-10 px-5 pr-10 rounded-full text-sm focus:outline-none">
+                <button type="submit" class="absolute right-0 top-0 mt-3 mr-4">
+                  <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
+                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"/>
+                  </svg>
+                </button>
+              </div>
+      <div class="flex py-3 px-4 rounded-lg text-black font-semibold cursor-pointer">
         <span>All categorie</span>
 
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
         </svg>
       </div>
-      <div class="bg-red-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
-        <span>Search</span>
-      </div>
+      
     </div>
 	</div>
 </div>
@@ -101,7 +142,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
-                  <button class="text-sm">Order</button> 
+                  <!-- <button class="text-sm">Order</button>  -->
             
           </div>
           
@@ -120,7 +161,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -151,7 +194,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -167,7 +212,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
 
-            <button class="text-sm">Add to cart</button>
+            <!-- <button class="text-sm">Add to cart</button> -->
           </div>
         </div>
 
@@ -182,7 +227,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -198,7 +245,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
 
-            <button class="text-sm">Add to cart</button>
+            <!-- <button class="text-sm">Add to cart</button> -->
           </div>
         </div>
 
@@ -213,7 +260,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -228,7 +277,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
 
-            <button class="text-sm">Add to cart</button>
+            <!-- <button class="text-sm">Add to cart</button> -->
           </div>
         </div>
 
@@ -243,7 +292,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -258,7 +309,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
 
-            <button class="text-sm">Add to cart</button>
+            <!-- <button class="text-sm">Add to cart</button> -->
           </div>
         </div>
 
@@ -274,7 +325,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -289,7 +342,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
 
-            <button class="text-sm">Add to cart</button>
+            <!-- <button class="text-sm">Add to cart</button> -->
           </div>
         </div>
 
@@ -305,7 +358,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -320,7 +375,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
 
-            <button class="text-sm">Add to cart</button>
+            
           </div>
         </div>
 
@@ -336,7 +391,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
 
-              <button class="text-sm">Add to cart</button>
+              <RouterLink to="/checkout">
+                <button class="text-sm">Order</button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -388,5 +445,9 @@
 
 <script >
 import { RouterLink ,RouterView} from 'vue-router';
-
+export default{
+  mounted(){
+    initFlowbite();
+  }
+}
 </script>
