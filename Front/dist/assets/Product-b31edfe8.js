@@ -1,1 +1,0 @@
-import{_ as e,o as t,c,a as o}from"./index-f31bba2e.js";const s={},_={class:"product bg-black"},n=o("h1",null,"This is an Product ",-1),a=[n];function r(d,i){return t(),c("div",_,a)}const u=e(s,[["render",r]]);export{u as default};

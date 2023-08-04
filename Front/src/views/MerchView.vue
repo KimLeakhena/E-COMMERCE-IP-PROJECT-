@@ -22,20 +22,20 @@ import { RouterLink } from 'vue-router';
             <div id="dropdownNavbar" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
                   <li>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Album</a>
+                    <a href="album" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Album</a>
                   </li>
                   <li>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">lightstick</a>
+                    <a href="lightstick" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">lightstick</a>
                   </li>
                   <li>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Merch</a>
+                    <a href="merch" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Merch</a>
                   </li>
                 </ul>
                
             </div>
         </li>
-        <RouterLink to="/lightstick">
-            <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">lightstick</a></li>
+        <RouterLink to="/about">
+            <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">Contact</a></li>
           </RouterLink>
           <RouterLink to="/Cart">
             <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8">
@@ -169,9 +169,9 @@ import { RouterLink } from 'vue-router';
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
-              <!-- <RouterLink to="/checkout"> -->
+              <RouterLink to="/checkout">
                 <button v-on:click="addProductToCart(product)" class="text-sm">Order</button>
-              <!-- </RouterLink> -->
+              </RouterLink>
             </div>
           </div>
         </div>

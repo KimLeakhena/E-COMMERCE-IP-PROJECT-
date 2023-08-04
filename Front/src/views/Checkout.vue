@@ -9,14 +9,32 @@ import { RouterLink } from 'vue-router';
         </div>
         <ul class="flex items-center gap-6 text-white text-2xl pr-2">
 
-          <RouterLink to="/album">
-            <li class="cursor-pointer w-full flex justify-center items-center"><a href="">Album</a></li>
+          <RouterLink to="/homepage">
+            <li class="cursor-pointer w-full flex justify-center items-center"><a href="">Home</a></li>
           </RouterLink>
-          <RouterLink to="/lightstick">
-            <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">lightstick</a></li>
-          </RouterLink>
-          <RouterLink to="/merch">
-            <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">Merch</a></li>
+          <li >
+            <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" class="flex items-center justify-between w-full py-2 pl-3 pr-4  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-stone-400 md:p-0 md:w-auto text-white dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">category<svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+              </svg>
+            </button>
+            <!-- Dropdown menu -->
+            <div id="dropdownNavbar" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                  <li>
+                    <a href="album" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Album</a>
+                  </li>
+                  <li>
+                    <a href="lightstick" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">lightstick</a>
+                  </li>
+                  <li>
+                    <a href="merch" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Merch</a>
+                  </li>
+                </ul>
+               
+            </div>
+        </li>
+        <RouterLink to="/lightstick">
+            <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">Contact</a></li>
           </RouterLink>
           <RouterLink to="/Cart">
             <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8">
@@ -58,9 +76,9 @@ import { RouterLink } from 'vue-router';
                     <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">settings</a>
                   </li>
                 </ul>
-                <!-- <div  v-on:click="onLogout()" class="py-1">
+                <div  v-on:click="onLogout()" class="py-1">
                   <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Log out</a>
-                </div> -->
+                </div>
               </div>
             </div>
           </li>
@@ -83,12 +101,12 @@ import { RouterLink } from 'vue-router';
       <div  class="flex flex-wrap  mx-8 my-8 h-auto  " >
         <div class="min-w-1/2 h-auto ">
           <div class="w-72 mx-20 my-10 flex flex-wrap ">
-            <img src="" class="w-full bg-cover">
+            <img src="https://www.ktown4u.com/goods_files/SH0164/goods_images/000097/GD00096414.default.2.jpg" class="w-full bg-cover">
           </div>
         </div>
         <div class="min-w-[50%] h-auto m-auto ">
           <div class="flex mx-5 justify-between text-2xl">
-            <p ></p>
+            <p > The 1st Mini Album [YOUTH IN THE SHADE]</p>
             <p>$</p>
           </div>
           <hr class="my-12 mx-5 h-0.5 border-t-0 bg-black " />
@@ -144,34 +162,6 @@ import { RouterLink } from 'vue-router';
           </div>
         </div>
         <div>
-          
-<h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white">How much do you expect to use each month?</h3>
-<ul class="grid w-full gap-6 md:grid-cols-2">
-    <li>
-        <input type="radio" id="hosting-small" name="hosting" value="hosting-small" class="hidden peer" required>
-        <label for="hosting-small" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">                           
-            <div class="block">
-                <div class="w-full text-lg font-semibold">0-50 MB</div>
-                <div class="w-full">Good for small websites</div>
-            </div>
-            <svg class="w-5 h-5 ml-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-            </svg>
-        </label>
-    </li>
-    <li>
-        <input type="radio" id="hosting-big" name="hosting" value="hosting-big" class="hidden peer">
-        <label for="hosting-big" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
-            <div class="block">
-                <div class="w-full text-lg font-semibold">500-1000 MB</div>
-                <div class="w-full">Good for large websites</div>
-            </div>
-            <svg class="w-5 h-5 ml-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-            </svg>
-        </label>
-    </li>
-</ul>
 
         </div>
         

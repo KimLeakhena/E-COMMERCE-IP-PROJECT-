@@ -1,1 +1,0 @@
-import{_ as e,o as t,c as o,a as s}from"./index-f31bba2e.js";const _={},c={class:"about bg-black"},a=s("h1",null,"This is an about page",-1),n=[a];function i(r,l){return t(),o("div",c,n)}const d=e(_,[["render",i]]);export{d as default};
