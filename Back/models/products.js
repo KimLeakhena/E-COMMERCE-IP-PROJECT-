@@ -12,9 +12,9 @@ var productSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'Items'
   },
-  // user: {
+  // artist: {
   //   type: Schema.Types.ObjectId,
-  //   ref: 'Users'
+  //   ref: 'artists'
   // },
   imageUrl: String,
   desc: String,

@@ -10,14 +10,32 @@ import { RouterLink } from 'vue-router';
         </div>
         <ul class="flex items-center gap-6 text-white text-2xl pr-2">
 
-          <RouterLink to="/album">
-            <li class="cursor-pointer w-full flex justify-center items-center"><a href="">Album</a></li>
+          <RouterLink to="/homepage">
+            <li class="cursor-pointer w-full flex justify-center items-center"><a href="">Home</a></li>
           </RouterLink>
-          <RouterLink to="/lightstick">
+          <li >
+            <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" class="flex items-center justify-between w-full py-2 pl-3 pr-4  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-stone-400 md:p-0 md:w-auto text-white dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">category<svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+              </svg>
+            </button>
+            <!-- Dropdown menu -->
+            <div id="dropdownNavbar" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Album</a>
+                  </li>
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">lightstick</a>
+                  </li>
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Merch</a>
+                  </li>
+                </ul>
+               
+            </div>
+        </li>
+        <RouterLink to="/lightstick">
             <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">lightstick</a></li>
-          </RouterLink>
-          <RouterLink to="/merch">
-            <li  class="cursor-pointer w-full flex justify-center items-center"><a href="">Merch</a></li>
           </RouterLink>
           <RouterLink to="/Cart">
             <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8">
@@ -134,264 +152,26 @@ import { RouterLink } from 'vue-router';
 <!-- Product List -->
 <section class="py-10 bg-gray-100">
   <div class="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-    <article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
+    <article v-for="product in products" :key="product._id" class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
       <a href="#">
         <div class="relative flex items-end overflow-hidden rounded-xl">
-          <img src="https://cdn-contents.weverseshop.io/public/shop/d5454d8cda84d9f51b2ac037bc80e685.png?q=95&w=320" alt="Hotel Photo" />
-          <div class="flex items-center space-x-1.5 rounded-lg bg-[#826B9F] hover:bg-[#B0A3C0] px-4 py-1.5 text-white duration-100 ">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-            </svg>
-
-            <!-- <button class="text-sm">Add to cart</button> -->
-          </div>
-        </div>
-
+          <img :src="product.imageUrl" alt="Hotel Photo" />
+         
+        </div> 
         <div class="mt-1 p-2">
-          <h2 class="text-slate-700">Adobe Photoshop CC 2022</h2>
-          <p class="mt-1 text-sm text-slate-400">Lisbon, Portugal</p>
+          <h2 class="text-slate-700">{{product.title}}</h2>
+          <p class="mt-1 text-sm text-slate-400">{{product.desc}}</p>
 
           <div class="mt-3 flex items-end justify-between">
-              <p class="text-lg font-bold text-[#826B9F]">$850</p>
+              <p class="text-lg font-bold text-[#826B9F]">{{product.price}}$</p>
 
             <div class="flex items-center space-x-1.5 rounded-lg bg-[#826B9F] hover:bg-[#B0A3C0] px-4 py-1.5 text-white duration-100 ">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
-
-              <RouterLink to="/checkout">
-                <button class="text-sm">Order</button>
-              </RouterLink>
-            </div>
-          </div>
-        </div>
-      </a>
-    </article>
-    <article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
-      <a href="#">
-        <div class="relative flex items-end overflow-hidden rounded-xl">
-          <img src=" https://cdn-contents.weverseshop.io/public/shop/3dec53e1e3807261a4cb2af2b21585bd.png?q=95&w=320" alt="Hotel Photo" />
-          <div class="absolute bottom-3 left-3 inline-flex items-center rounded-lg bg-white p-2 shadow-md">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-            <span class="ml-1 text-sm text-slate-400">4.9</span>
-          </div>
-        </div>
-
-        <div class="mt-1 p-2">
-          <h2 class="text-slate-700">The Hilton Hotel</h2>
-          <p class="mt-1 text-sm text-slate-400">Lisbon, Portugal</p>
-
-          <div class="mt-3 flex items-end justify-between">
-              <p class="text-lg font-bold text-[#826B9F]">$850</p>
-   
-
-            <div class="flex items-center space-x-1.5 rounded-lg bg-[#826B9F] hover:bg-[#B0A3C0] px-4 py-1.5 text-white duration-100 ">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-              </svg>
-
-              <RouterLink to="/checkout">
-                <button class="text-sm">Order</button>
-              </RouterLink>
-            </div>
-          </div>
-        </div>
-      </a>
-    </article>
-
-    <article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
-      <a href="#">
-        <div class="relative flex items-end overflow-hidden rounded-xl">
-          <img src=" https://cdn-contents.weverseshop.io/public/shop/faa8bab5275ddb83e0911b391e12905a.png?q=95&w=320" alt="Hotel Photo" />
-          <div class="flex items-center space-x-1.5 rounded-lg bg-[#826B9F] hover:bg-[#B0A3C0] px-4 py-1.5 text-white duration-100">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-            </svg>
-
-            <!-- <button class="text-sm">Add to cart</button> -->
-          </div>
-        </div>
-
-        <div class="mt-1 p-2">
-          <h2 class="text-slate-700">The Hilton Hotel</h2>
-          <p class="mt-1 text-sm text-slate-400">Lisbon, Portugal</p>
-
-          <div class="mt-3 flex items-end justify-between">
-              <p class="text-lg font-bold text-[#826B9F]">$450</p>
-            <div class="flex items-center space-x-1.5 rounded-lg bg-[#826B9F] hover:bg-[#B0A3C0] px-4 py-1.5 text-white duration-100 ">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-              </svg>
-
-              <RouterLink to="/checkout">
-                <button class="text-sm">Order</button>
-              </RouterLink>
-            </div>
-          </div>
-        </div>
-      </a>
-    </article>
-
-    <article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
-      <a href="#">
-        <div class="relative flex items-end overflow-hidden rounded-xl">
-          <img src="https://cdn-contents.weverseshop.io/public/shop/d95aa2ac13d535e5d9fc85689978678f.png?q=95&w=320" alt="Hotel Photo" />
-          <div class="flex items-center space-x-1.5 rounded-lg bg-[#826B9F] hover:bg-[#B0A3C0] px-4 py-1.5 text-white duration-100">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-            </svg>
-
-            <!-- <button class="text-sm">Add to cart</button> -->
-          </div>
-        </div>
-
-        <div class="mt-1 p-2">
-          <h2 class="text-slate-700">The Hilton Hotel</h2>
-          <p class="mt-1 text-sm text-slate-400">Lisbon, Portugal</p>
-
-          <div class="mt-3 flex items-end justify-between">
-              <p class="text-lg font-bold text-[#826B9F]">$450</p>
-            <div class="flex items-center space-x-1.5 rounded-lg bg-[#826B9F] hover:bg-[#B0A3C0] px-4 py-1.5 text-white duration-100 ">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-              </svg>
-
-              <RouterLink to="/checkout">
-                <button class="text-sm">Order</button>
-              </RouterLink>
-            </div>
-          </div>
-        </div>
-      </a>
-    </article>
-    <article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
-      <a href="#">
-        <div class="relative flex items-end overflow-hidden rounded-xl">
-          <img src=" https://cdn-contents.weverseshop.io/public/shop/8939155e6c8ed5ccd53ab97036ba8dff.png?q=95&w=320" alt="Hotel Photo" />
-          <div class="flex items-center space-x-1.5 rounded-lg bg-[#826B9F] hover:bg-[#B0A3C0] px-4 py-1.5 text-white duration-100 ">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-            </svg>
-
-            <!-- <button class="text-sm">Add to cart</button> -->
-          </div>
-        </div>
-
-        <div class="mt-1 p-2">
-          <h2 class="text-slate-700">The Hilton Hotel</h2>
-          <p class="mt-1 text-sm text-slate-400">Lisbon, Portugal</p>
-
-          <div class="mt-3 flex items-end justify-between">
-              <p class="text-lg font-bold text-[#826B9F]">$450</p>
-            <div class="flex items-center space-x-1.5 rounded-lg bg-[#826B9F] hover:bg-[#B0A3C0] px-4 py-1.5 text-white duration-100 ">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-              </svg>
-
-              <RouterLink to="/checkout">
-                <button class="text-sm">Order</button>
-              </RouterLink>
-            </div>
-          </div>
-        </div>
-      </a>
-    </article>
-    <article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
-      <a href="#">
-        <div class="relative flex items-end overflow-hidden rounded-xl">
-          <img src=" https://cdn-contents.weverseshop.io/public/shop/8742ba2337fdaa7056d9b3a02914bd6f.png?q=95&w=320" alt="Hotel Photo" />
-          <div class="flex items-center space-x-1.5 rounded-lg bg-[#826B9F] hover:bg-[#B0A3C0] px-4 py-1.5 text-white duration-100 ">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-            </svg>
-
-           
-          </div>
-        </div>
-
-        <div class="mt-1 p-2">
-          <h2 class="text-slate-700">WINNER LIGHT STICK STRAP</h2>
-          <p class="mt-1 text-sm text-slate-400">Seventeen</p>
-
-          <div class="mt-3 flex items-end justify-between">
-              <p class="text-lg font-bold text-[#826B9F]">$18</p>
-
-            <div class="flex items-center space-x-1.5 rounded-lg bg-[#826B9F] hover:bg-[#B0A3C0] px-4 py-1.5 text-white duration-100 ">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-              </svg>
-
-              <RouterLink to="/checkout">
-                <button class="text-sm">Order</button>
-              </RouterLink>
-            </div>
-          </div>
-        </div>
-      </a>
-    </article>
-    <article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
-      <a href="#">
-        <div class="relative flex items-end overflow-hidden rounded-xl">
-          <img src="https://cdn-contents.weverseshop.io/public/shop/b21455ca44d36fc0a259b3fc71b9d5e4.png?q=95&w=320" alt="Hotel Photo" />
-          <div class="flex items-center space-x-1.5 rounded-lg bg-[#826B9F] hover:bg-[#B0A3C0] px-4 py-1.5 text-white duration-100 ">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-            </svg>
-
-            <!-- <button class="text-sm">Add to cart</button> -->
-          </div>
-        </div>
-
-        <div class="mt-1 p-2">
-          <h2 class="text-slate-700"> TREASURE TOUR FOLDING BAG</h2>
-          <p class="mt-1 text-sm text-slate-400">TREASURE</p>
-
-          <div class="mt-3 flex items-end justify-between">
-              <p class="text-lg font-bold text-[#826B9F]">$11</p>
-
-            <div class="flex items-center space-x-1.5 rounded-lg bg-[#826B9F] hover:bg-[#B0A3C0] px-4 py-1.5 text-white duration-100 ">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-              </svg>
-
-              <RouterLink to="/checkout">
-                <button class="text-sm">Order</button>
-              </RouterLink>
-            </div>
-          </div>
-        </div>
-      </a>
-    </article>
-    <article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
-      <a href="#">
-        <div class="relative flex items-end overflow-hidden rounded-xl">
-          <img src=" https://cdn-contents.weverseshop.io/public/shop/9be265449cf380d848f1f885cef2f5fc.png?q=95&w=720" alt="Hotel Photo" />
-          <div class="flex items-center space-x-1.5 rounded-lg bg-[#826B9F] hover:bg-[#B0A3C0] px-4 py-1.5 text-white duration-100 ">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-            </svg>
-
-            <!-- <button class="text-sm">Add to cart</button> -->
-          </div>
-        </div>
-
-        <div class="mt-1 p-2">
-          <h2 class="text-slate-700">The Hilton Hotel</h2>
-          <p class="mt-1 text-sm text-slate-400">Lisbon, Portugal</p>
-
-          <div class="mt-3 flex items-end justify-between">
-              <p class="text-lg font-bold text-[#826B9F]">$450</p>
-
-            <div class="flex items-center space-x-1.5 rounded-lg bg-[#826B9F] hover:bg-[#B0A3C0] px-4 py-1.5 text-white duration-100 ">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-              </svg>
-
-              <RouterLink to="/checkout">
-                <button class="text-sm">Order</button>
-              </RouterLink>
+              <!-- <RouterLink to="/checkout"> -->
+                <button v-on:click="addProductToCart(product)" class="text-sm">Order</button>
+              <!-- </RouterLink> -->
             </div>
           </div>
         </div>
@@ -442,9 +222,35 @@ import { RouterLink } from 'vue-router';
 </template>
 
 <script >
+import { RouterLink } from 'vue-router';
+import categoryApi from "../libs/apis/category";
+import itemApi from "../libs/apis/item"
+import productApi from "../libs/apis/product"
 export default{
-  mounted(){
+  data() {
+          return {
+      categories: [],
+      items: [],
+      products: [],
+      title: "",
+      imageUrl: "",
+      desc: "",
+      categoryId: "",
+      itemId: "",
+      priceModalShown: false,
+      selectedProduct: null,
+      price: "",
+      source: "",
+      
+    };
+        },
+    async mounted() {
+   
+    this.categories = await categoryApi.all();
+    this.items = await itemApi.all();
+    this.products = await productApi.all();
     initFlowbite();
-  }
+  },
+  
 }
 </script>

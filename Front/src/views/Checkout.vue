@@ -80,16 +80,16 @@ import { RouterLink } from 'vue-router';
         <p>ZEROBASEONE - The 1st Mini Album</p>
       </div>
       <!-- fororderproduct -->
-      <div class="flex flex-wrap  mx-8 my-8 h-auto  ">
+      <div  class="flex flex-wrap  mx-8 my-8 h-auto  " >
         <div class="min-w-1/2 h-auto ">
           <div class="w-72 mx-20 my-10 flex flex-wrap ">
-            <img src="../assets/image/GD00096418.default.1.png" class="w-full bg-cover">
+            <img src="" class="w-full bg-cover">
           </div>
         </div>
         <div class="min-w-[50%] h-auto m-auto ">
           <div class="flex mx-5 justify-between text-2xl">
-            <p >ZEROBASEONE - The 1st Mini Album</p>
-            <p>16.0$</p>
+            <p ></p>
+            <p>$</p>
           </div>
           <hr class="my-12 mx-5 h-0.5 border-t-0 bg-black " />
           <div class="flex mx-5 justify-between text-2xl">
@@ -142,6 +142,37 @@ import { RouterLink } from 'vue-router';
             </div>
             
           </div>
+        </div>
+        <div>
+          
+<h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white">How much do you expect to use each month?</h3>
+<ul class="grid w-full gap-6 md:grid-cols-2">
+    <li>
+        <input type="radio" id="hosting-small" name="hosting" value="hosting-small" class="hidden peer" required>
+        <label for="hosting-small" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">                           
+            <div class="block">
+                <div class="w-full text-lg font-semibold">0-50 MB</div>
+                <div class="w-full">Good for small websites</div>
+            </div>
+            <svg class="w-5 h-5 ml-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+            </svg>
+        </label>
+    </li>
+    <li>
+        <input type="radio" id="hosting-big" name="hosting" value="hosting-big" class="hidden peer">
+        <label for="hosting-big" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+            <div class="block">
+                <div class="w-full text-lg font-semibold">500-1000 MB</div>
+                <div class="w-full">Good for large websites</div>
+            </div>
+            <svg class="w-5 h-5 ml-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+            </svg>
+        </label>
+    </li>
+</ul>
+
         </div>
         
         <!-- forrelatetoproduct -->
@@ -234,12 +265,20 @@ import { RouterLink } from 'vue-router';
 </style>
 <script>
 import { RouterLink, RouterView } from "vue-router";
+import productApi from "../libs/apis/product";
 export default{
+  data(){
+    return{
+      products: [],
+    };
+  },
+  methods:{},
+  async mounted(){
+    this.products=await productApi.all();
+  },
   mounted() {
     initFlowbite();
-    function myorder() {
-      document.getElementById("demo").innerHTML = "Hello World";
-    }
+    
     
   }
 }

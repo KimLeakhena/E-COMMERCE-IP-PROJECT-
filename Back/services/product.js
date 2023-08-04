@@ -24,6 +24,28 @@ const findById = async (id) => {
 
   return products[0]
 }
+const findByCategoryId = async (categoryID) => {
+  const products = await Products.aggregate([
+    {
+      "$match": {
+        _id: mongoose.Types.ObjectId(id),
+      }
+    },
+    {
+      $lookup: {
+        from: "prices",
+        localField: "_id",
+        foreignField: "product",
+        as: "prices"
+      }
+    }
+  ])
+
+  if (!products?.length)
+    return null
+
+  return products[0]
+}
 
 const findAll = async (category = '', item = '') => {
   let matchCond = {};
@@ -88,5 +110,6 @@ module.exports = {
   update,
   remove,
   findAll,
-  create
+  create,
+  findByCategoryId,
 }
