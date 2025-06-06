@@ -7,9 +7,16 @@ module.exports = {
 
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'soft-bg': '#fff9ef',
+        'main-color': '#334eac',
+        'primary-color': '#bad6eb'
+      },
+    },
   },
   plugins: [
     require('flowbite/plugin')
   ],
+
 }

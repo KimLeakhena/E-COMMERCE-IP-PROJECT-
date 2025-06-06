@@ -9,6 +9,8 @@
 import { RouterLink, RouterView } from "vue-router";
 import Index from "./views/index.vue";
 import Checkout from "./views/Checkout.vue";
+import Navbar from "./components/Navbar.vue";
+import Slider from "./components/slider.vue";
 export default {
   data() {
     return {
@@ -18,6 +20,8 @@ export default {
   components: {
     Index,
     Checkout,
+    Navbar,
+    Slider,
   },
 };
 </script>
