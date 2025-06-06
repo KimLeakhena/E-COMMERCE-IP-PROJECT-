@@ -443,7 +443,7 @@ import { RouterLink } from 'vue-router';
 import { RouterLink, RouterView } from "vue-router";
 import Navbar from "@/components/Navbar.vue";
 import HeadphoneWidget from "@/components/poster.vue";
-import Slider from "@/components/Slider.vue";
+import Slider from "../component/Slider.vue";
 import ProductCard from "../components/ProductCard.vue";
 import Footers from "../components/Footers.vue";
 
