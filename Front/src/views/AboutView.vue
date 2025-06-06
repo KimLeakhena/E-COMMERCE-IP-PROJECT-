@@ -210,7 +210,7 @@
                 <div class="w-full shrink-0 grow-0 basis-auto lg:w-7/12">
                   <div class="relative flex items-center justify-center h-full">
                     <img
-                      src="image/ig_account.png"
+                      src="../assets/image/ig_account.png"
                       alt="What's New"
                       class="object-cover rounded-lg max-w-full max-h-full"
                     />
