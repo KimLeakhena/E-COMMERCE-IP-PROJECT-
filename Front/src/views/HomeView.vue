@@ -443,7 +443,7 @@ import { RouterLink } from 'vue-router';
 import { RouterLink, RouterView } from "vue-router";
 import Navbar from "@/components/Navbar.vue";
 import HeadphoneWidget from "@/components/poster.vue";
-import Slider from "../component/Slider.vue";
+import Slider from "@/components/Slider.vue";
 import ProductCard from "../components/ProductCard.vue";
 import Footers from "../components/Footers.vue";
 
@@ -458,12 +458,12 @@ export default {
         { title: "Best Seller 1", image: "/image/IMG_3355.JPG" },
         { title: "Best Seller 2", image: "/image/IMG_3374.JPG" },
         { title: "Best Seller 3", image: "/image/IMG_3379.JPG" },
-        { title: "Best Seller 4", image: "/image/IMG_3381.JPG" },
-        { title: "Best Seller 5", image: "/image/IMG_3383.JPG" },
+        { title: "Best Seller 4", image: "/image/img_3382.jpg" },
+        { title: "Best Seller 5", image: "/image/img_3382.jpg" },
       ],
       slideData: [
         {
-          image: "/image/IMG_3339.JPG",
+          image: "/image/img_3339.jpg",
           tag: "New",
           title: "Available now. Don't miss out!",
           description:
