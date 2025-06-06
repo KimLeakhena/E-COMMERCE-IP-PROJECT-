@@ -72,7 +72,7 @@ import { RouterLink } from 'vue-router';
 
         <div class="relative flex-1 m-2">
           <img
-            src="../assets/image/IMG_3368.JPG"
+            src="../assets/image/grid_color.jpg"
             alt="Buy 1 Get 1"
             class="w-full h-54 object-cover rounded-lg"
           />
