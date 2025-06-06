@@ -80,4 +80,6 @@ export default {
   left: 50%;
   transform: translateX(-50%);
 }
+.image {
+}
 </style>
