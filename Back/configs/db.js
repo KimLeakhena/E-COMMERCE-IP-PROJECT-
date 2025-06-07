@@ -1,13 +1,18 @@
 const mongoose = require('mongoose');
+require('dotenv').config(); // Load variables from .env
+
+mongoose.set('strictQuery', false); // Optional, to suppress warnings
 
 module.exports = async () => {
   try {
-    await mongoose.connect('mongodb://170.187.231.28:1020/ecommerce', {
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
       autoIndex: true,
-      serverSelectionTimeoutMS: 30000 // default 30 seconds
+      serverSelectionTimeoutMS: 30000
     });
-    console.log("MongoDB connected~");
+    console.log("✅ MongoDB connected~");
   } catch (err) {
-    console.log("Mongoose: ",err);
+    console.log("❌ Mongoose error:", err);
   }
 }
