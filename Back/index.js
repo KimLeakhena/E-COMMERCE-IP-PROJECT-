@@ -27,5 +27,5 @@ app.use((err, req, res, next) => {
 })
 
 
-app.listen(process.env.PORT || 3000, () => console.log('App avaiable on https://api.ahna.store/'))
+app.listen(process.env.PORT || 3000, () => console.log('App avaiable on https://chocobebe.xyz/'))
 
