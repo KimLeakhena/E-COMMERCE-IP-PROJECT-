@@ -10,6 +10,8 @@ router.use('/category', require('./category'));
 router.use('/item', require('./item'));
 router.use('/product', require('./product'));
 router.use('/price', require('./price'));
+router.use('/test', require('./test'));
+
 
 
 module.exports = router;

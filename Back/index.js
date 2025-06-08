@@ -16,16 +16,26 @@ require('./configs/session')(app);
 // Connect mongodb
 require('./configs/db')();
 
+
 app.use(require('./routes'));
 
 app.use((err, req, res, next) => {
-  return res.json({
+  return res.status(500).json({
     success: false,
     code: 0,
-    error: err
-  })
-})
+    error: err.message || 'Internal Server Error',
+    stack: process.env.NODE_ENV !== 'production' ? err.stack : undefined
+  });
+});
+app.get('/', (req, res) => {
+  res.send('🎉 Chocobebe API is running!');
+});
 
 
-app.listen(process.env.PORT || 3000, () => console.log('App avaiable on https://chocobebe.xyz/'))
+
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
