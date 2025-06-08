@@ -20,6 +20,8 @@ require('./configs/db')();
 app.use(require('./routes'));
 
 app.use((err, req, res, next) => {
+  console.error("❌ Global error handler:", err); // log full error
+
   return res.status(500).json({
     success: false,
     code: 0,
@@ -27,6 +29,7 @@ app.use((err, req, res, next) => {
     stack: process.env.NODE_ENV !== 'production' ? err.stack : undefined
   });
 });
+
 app.get('/', (req, res) => {
   res.send('🎉 Chocobebe API is running!');
 });

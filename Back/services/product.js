@@ -49,8 +49,8 @@ const findByCategoryId = async (categoryID) => {
 
 const findAll = async (category = '', item = '') => {
   let matchCond = {};
-  if(category) matchCond['category'] = mongoose.Types.ObjectId(category)
-  if(item) matchCond['item'] = mongoose.Types.ObjectId(item)
+  if (category) matchCond['category'] = mongoose.Types.ObjectId(category)
+  if (item) matchCond['item'] = mongoose.Types.ObjectId(item)
 
   const products = await Products.aggregate([
     {

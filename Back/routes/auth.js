@@ -27,9 +27,19 @@ router.post('/login', auth.ensureSignedOut, joiValidation(signInSchema), async (
   res.json(result);
 })
 
-router.post('/register', auth.ensureSignedOut, joiValidation(signUpSchema), async (req, res, next) => {
-  const createdUser = await register(req.body)
-  res.json(createdUser);
-})
+router.post(
+  '/register',
+  auth.ensureSignedOut,
+  joiValidation(signUpSchema),
+  async (req, res, next) => {
+    try {
+      const createdUser = await register(req.body);
+      res.json({ success: true, user: createdUser });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
 
 module.exports = router
