@@ -1,8 +1,8 @@
 var item = {
   async create({ name, desc, category }) {
-    const res = await fetch("https://api.ahna.store/item/create", {
+    const res = await fetch("https://chocobebe.xyz/item/create", {
       method: "POST",
- 
+
       headers: {
         "Content-type": "application/json",
       },
@@ -13,12 +13,12 @@ var item = {
     return result;
   },
   async all() {
-    const res = await fetch("https://api.ahna.store/item/all", {
+    const res = await fetch("https://chocobebe.xyz/item/all", {
       method: "GET",
- 
+
       headers: {
         "Content-type": "application/json",
-       
+
       },
     });
 

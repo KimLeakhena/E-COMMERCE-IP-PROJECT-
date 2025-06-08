@@ -1,8 +1,8 @@
 var price = {
   async add({ price, source, product }) {
-    const res = await fetch("https://api.ahna.store/price/create", {
+    const res = await fetch("https://chocobebe.xyz/price/create", {
       method: "POST",
- 
+
       headers: {
         "Content-type": "application/json",
       },

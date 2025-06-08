@@ -14,11 +14,13 @@ import { RouterLink } from 'vue-router';
           <p class="text-lg text-gray-700 mb-6">
             cute. aesthetic. cozy designs.
           </p>
-          <button
-            class="bg-main-color text-white font-semibold py-2 px-4 rounded-md hover:bg-primary-color"
-          >
-            Shop All
-          </button>
+          <RouterLink to="/product">
+            <button
+              class="bg-main-color text-white font-semibold py-2 px-4 rounded-md hover:bg-primary-color"
+            >
+              Shop All
+            </button>
+          </RouterLink>
         </div>
 
         <div class="flex">
@@ -238,7 +240,7 @@ import { RouterLink } from 'vue-router';
                 type="button"
                 class="self-start bg-main-color hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md shadow-md transition duration-300"
               >
-                Order Now
+                View Detail
               </button>
             </div>
           </div>
