@@ -5,7 +5,7 @@ const register = async (params) => {
     const { email, username, firstName, lastName, password } = params;
 
     // check if email existed
-    const existed = await Users.findOne({email});
+    const existed = await Users.findOne({ email });
     if (existed) {
       throw "User is already existed~";
     }

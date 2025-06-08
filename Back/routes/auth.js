@@ -34,12 +34,25 @@ router.post(
   async (req, res, next) => {
     try {
       const createdUser = await register(req.body);
-      res.json({ success: true, user: createdUser });
+
+      if (!createdUser.success) {
+        return res.status(400).json({
+          success: false,
+          error: createdUser.error || "User creation failed",
+        });
+      }
+
+      return res.json({
+        success: true,
+        user: createdUser.user
+      });
     } catch (err) {
+      console.error("❌ Error in /register:", err);
       next(err);
     }
   }
 );
+
 
 
 module.exports = router
