@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
 
-const productService = require('./services/productService');
+const productService = require('./services/product');
 // Connect session
 require('./configs/session')(app);
 
