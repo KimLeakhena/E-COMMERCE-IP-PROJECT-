@@ -14,28 +14,16 @@ import { RouterLink } from 'vue-router';
         <div>Relate Product</div>
         <div class="flex justify-center flex-wrap">
           <div class="w-48 h-auto mx-9 my-10">
-            <img
-              src="../assets/image/IMG_3348.JPG"
-              class="w-full bg-cover rounded-xl"
-            />
+            <img src="/image/IMG_3355.JPG" class="w-full bg-cover rounded-xl" />
           </div>
           <div class="w-48 h-auto mx-9 my-10">
-            <img
-              src="../assets/image/IMG_3349.JPG"
-              class="w-full bg-cover rounded-xl"
-            />
+            <img src="/image/IMG_3374.JPG" class="w-full bg-cover rounded-xl" />
           </div>
           <div class="w-48 h-auto mx-9 my-10">
-            <img
-              src="../assets/image/IMG_3356.JPG"
-              class="w-full bg-cover rounded-xl"
-            />
+            <img src="/image/IMG_3379.JPG" class="w-full bg-cover rounded-xl" />
           </div>
           <div class="w-48 h-auto mx-9 my-10">
-            <img
-              src="../assets/image/IMG_3358.JPG"
-              class="w-full bg-cover rounded-xl"
-            />
+            <img src="/image/img_3382.jpg" class="w-full bg-cover rounded-xl" />
           </div>
         </div>
       </div>
