@@ -8,10 +8,11 @@ const { register } = require('../services/register');
 const userService = require('../services/user');
 const { logout } = require('../services/logout');
 
-router.get('/me', auth.ensureSignedIn, async (req, res) => {
-  res.json(req.user);
-});
-
+router.get('/me', auth.ensureSignedIn, auth.currentUser, async function (req, res, next) {
+  const { currentUser } = req;
+  const result = await userService.findById(currentUser?._id);
+  res.json(result);
+})
 
 router.post('/logout', auth.ensureSignedIn, async (req, res) => {
   const result = logout(req.session);
@@ -26,14 +27,9 @@ router.post('/login', auth.ensureSignedOut, joiValidation(signInSchema), async (
   res.json(result);
 })
 
-router.post('/register', joiValidation(signUpSchema), async (req, res, next) => {
-  try {
-    const createdUser = await register(req.body);
-    res.json(createdUser);
-  } catch (err) {
-    next(err); // so it triggers your error handler
-  }
-});
-
+router.post('/register', auth.ensureSignedOut, joiValidation(signUpSchema), async (req, res, next) => {
+  const createdUser = await register(req.body)
+  res.json(createdUser);
+})
 
 module.exports = router

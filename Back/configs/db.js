@@ -7,10 +7,9 @@ module.exports = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
-      useUnifiedTopology: true,
-      autoIndex: true,
-      serverSelectionTimeoutMS: 30000
+      useUnifiedTopology: true
     });
+
     console.log("✅ MongoDB connected~");
   } catch (err) {
     console.log("❌ Mongoose error:", err);
