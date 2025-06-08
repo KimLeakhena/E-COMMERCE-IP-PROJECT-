@@ -21,7 +21,7 @@ import { RouterLink } from 'vue-router';
           </div>
           <div class="w-48 h-auto mx-9 my-10">
             <img
-              src="../assets/image/IMG_3352.JPG"
+              src="../assets/image/IMG_3349.JPG"
               class="w-full bg-cover rounded-xl"
             />
           </div>
