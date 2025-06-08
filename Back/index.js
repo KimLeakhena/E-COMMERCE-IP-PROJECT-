@@ -1,25 +1,33 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors')
+const cors = require('cors');
 const app = express();
 
-app.use(cors("*"))
-
-// parse application/x-www-form-urlencoded
+app.use(cors());  // Allow all origins
 app.use(bodyParser.urlencoded({ extended: true }));
-// parse application/json
 app.use(bodyParser.json());
 
-const productService = require('./services/product');
-// Connect session
-require('./configs/session')(app);
+// Simple test GET
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'Test route working' });
+});
 
-// Connect mongodb
-require('./configs/db')();
+// Simple POST /create to test input
+app.post('/create', (req, res) => {
+  // Just return the received data
+  const { title, category, item, user, imageUrl, desc } = req.body;
 
-app.use(require('./routes'));
+  console.log('Received /create data:', req.body);
 
+  res.json({
+    success: true,
+    message: 'Data received successfully',
+    data: { title, category, item, user, imageUrl, desc }
+  });
+});
+
+// Error handler
 app.use((err, req, res, next) => {
   return res.status(500).json({
     success: false,
@@ -29,31 +37,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-
-app.get('/api/test', (req, res) => {
-  res.json({ message: 'Test route working' });
-});
-app.post('/create', async (req, res,) => {
-
-  const { title, category, item, user, imageUrl, desc } = req.body;
-
-  const result = await productService.create({
-    title,
-    category,
-    item,
-    user,
-    imageUrl,
-    desc,
-  });
-
-  res.json(result);
-
-});
-
-
-
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
