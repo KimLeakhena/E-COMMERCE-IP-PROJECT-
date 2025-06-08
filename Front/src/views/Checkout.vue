@@ -13,18 +13,10 @@ import { RouterLink } from 'vue-router';
       <div class="mx-8 text-2xl text-main-color font-medium">
         <div>Relate Product</div>
         <div class="flex justify-center flex-wrap">
-          <div class="w-48 h-auto mx-9 my-10">
-            <img src="/image/IMG_3355.JPG" class="w-full bg-cover rounded-xl" />
-          </div>
-          <div class="w-48 h-auto mx-9 my-10">
-            <img src="/image/IMG_3374.JPG" class="w-full bg-cover rounded-xl" />
-          </div>
-          <div class="w-48 h-auto mx-9 my-10">
-            <img src="/image/IMG_3379.JPG" class="w-full bg-cover rounded-xl" />
-          </div>
-          <div class="w-48 h-auto mx-9 my-10">
-            <img src="/image/img_3382.jpg" class="w-full bg-cover rounded-xl" />
-          </div>
+          <ImageCard image="/image/IMG_3362.JPG" />
+          <ImageCard image="/image/IMG_3348.JPG" />
+          <ImageCard image="/image/IMG_3351.JPG" />
+          <ImageCard image="/image/IMG_3358.JPG" />
         </div>
       </div>
     </main>
@@ -64,8 +56,9 @@ import productApi from "../libs/apis/product";
 import Navbar from "../components/Navbar.vue";
 import Footers from "../components/Footers.vue";
 import ProductDetail from "../components/ProductDetail.vue";
+import ImageCard from "../components/ImageCard.vue";
 export default {
-  components: { Navbar, Footers, ProductDetail },
+  components: { Navbar, Footers, ProductDetail, ImageCard },
   data() {
     return {
       products: [],
