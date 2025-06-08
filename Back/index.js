@@ -14,28 +14,28 @@ app.get('/api/test', (req, res) => {
 });
 
 // Simple POST /create to test input
-app.post('/create', async (req, res, next) => {
-  try {
-    const { id, name, images, price, shortDesc, fullDesc, variants } = req.body;
+// app.post('/create', async (req, res, next) => {
+//   try {
+//     const { id, name, images, price, shortDesc, fullDesc, variants } = req.body;
 
-    const result = await productService.create({
-      id,
-      name,
-      images,
-      price,
-      shortDesc,
-      fullDesc,
-      variants
-    });
+//     const result = await productService.create({
+//       id,
+//       name,
+//       images,
+//       price,
+//       shortDesc,
+//       fullDesc,
+//       variants
+//     });
 
-    res.json({ success: true, product: result });
-  } catch (err) {
-    next(err);
-  }
-});
+//     res.json({ success: true, product: result });
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 const Product = require('./models/Product');
 
-app.post('/products', async (req, res, next) => {
+app.post('/create/products', async (req, res, next) => {
   try {
     const { name, images, price, shortDesc, fullDesc, variants } = req.body;
     const newProduct = new Product({ name, images, price, shortDesc, fullDesc, variants });
