@@ -31,6 +31,23 @@ app.use((err, req, res, next) => {
 app.get('/api/test', (req, res) => {
   res.json({ message: 'Test route working' });
 });
+app.post('/create', async (req, res,) => {
+
+  const { title, category, item, user, imageUrl, desc } = req.body;
+
+  const result = await productService.create({
+    title,
+    category,
+    item,
+    user,
+    imageUrl,
+    desc,
+  });
+
+  res.json(result);
+
+});
+
 
 
 const PORT = process.env.PORT || 3000;
