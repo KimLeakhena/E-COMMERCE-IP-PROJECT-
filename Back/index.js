@@ -14,18 +14,47 @@ app.get('/api/test', (req, res) => {
 });
 
 // Simple POST /create to test input
-app.post('/create', (req, res) => {
-  // Just return the received data
-  const { title, category, item, user, imageUrl, desc } = req.body;
+app.post('/create', async (req, res, next) => {
+  try {
+    const { id, name, images, price, shortDesc, fullDesc, variants } = req.body;
 
-  console.log('Received /create data:', req.body);
+    const result = await productService.create({
+      id,
+      name,
+      images,
+      price,
+      shortDesc,
+      fullDesc,
+      variants
+    });
 
-  res.json({
-    success: true,
-    message: 'Data received successfully',
-    data: { title, category, item, user, imageUrl, desc }
-  });
+    res.json({ success: true, product: result });
+  } catch (err) {
+    next(err);
+  }
 });
+const Product = require('./models/Product');
+
+app.post('/products', async (req, res, next) => {
+  try {
+    const { name, images, price, shortDesc, fullDesc, variants } = req.body;
+    const newProduct = new Product({ name, images, price, shortDesc, fullDesc, variants });
+    const savedProduct = await newProduct.save();
+    res.status(201).json({ success: true, product: savedProduct });
+  } catch (err) {
+    next(err);
+  }
+});
+app.get('/products', async (req, res, next) => {
+  try {
+    const products = await Product.find();
+    res.json({ success: true, products });
+  } catch (err) {
+    next(err);
+  }
+});
+
+
 
 // Error handler
 app.use((err, req, res, next) => {

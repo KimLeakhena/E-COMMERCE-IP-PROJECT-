@@ -1,27 +1,14 @@
-"use strict"
-var mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose');
 
-var productSchema = new mongoose.Schema({
-  title: String,
-  category: {
-    type: Schema.Types.ObjectId,
-    ref: 'Categories'
-  },
-  item: {
-    type: Schema.Types.ObjectId,
-    ref: 'Items'
-  },
-  // artist: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'artists'
-  // },
-  imageUrl: String,
-  desc: String,
+const productSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  images: [{ type: String }], // Multiple images
+  price: { type: String, required: true },
+  shortDesc: { type: String },
+  fullDesc: { type: String },
+  variants: [{ type: String }]
 }, {
-  timestamps: true,
+  timestamps: true // optional: createdAt, updatedAt
 });
 
-productSchema.index({ title: 'text' });
-var Posts = mongoose.model('Products', productSchema);
-module.exports = Posts;
+module.exports = mongoose.model('Product', productSchema);

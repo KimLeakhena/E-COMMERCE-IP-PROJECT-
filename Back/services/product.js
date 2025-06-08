@@ -1,115 +1,120 @@
-
-const Products = require("../models/products")
-var mongoose = require('mongoose');
-
-const findById = async (id) => {
-  const products = await Products.aggregate([
-    {
-      "$match": {
-        _id: mongoose.Types.ObjectId(id),
-      }
-    },
-    {
-      $lookup: {
-        from: "prices",
-        localField: "_id",
-        foreignField: "product",
-        as: "prices"
-      }
-    }
-  ])
-
-  if (!products?.length)
-    return null
-
-  return products[0]
-}
-const findByCategoryId = async (categoryID) => {
-  const products = await Products.aggregate([
-    {
-      "$match": {
-        _id: mongoose.Types.ObjectId(id),
-      }
-    },
-    {
-      $lookup: {
-        from: "prices",
-        localField: "_id",
-        foreignField: "product",
-        as: "prices"
-      }
-    }
-  ])
-
-  if (!products?.length)
-    return null
-
-  return products[0]
+async function create(data) {
+  const product = new Product(data);
+  return await product.save();
 }
 
-const findAll = async (category = '', item = '') => {
-  let matchCond = {};
-  if (category) matchCond['category'] = mongoose.Types.ObjectId(category)
-  if (item) matchCond['item'] = mongoose.Types.ObjectId(item)
+module.exports = { create };
+// const Products = require("../models/products")
+// var mongoose = require('mongoose');
 
-  const products = await Products.aggregate([
-    {
-      "$match": matchCond
-    },
-    {
-      $lookup: {
-        from: "prices",
-        localField: "_id",
-        foreignField: "product",
-        as: "prices"
-      },
+// const findById = async (id) => {
+//   const products = await Products.aggregate([
+//     {
+//       "$match": {
+//         _id: mongoose.Types.ObjectId(id),
+//       }
+//     },
+//     {
+//       $lookup: {
+//         from: "prices",
+//         localField: "_id",
+//         foreignField: "product",
+//         as: "prices"
+//       }
+//     }
+//   ])
 
-    },
-    {
-      $lookup: {
-        from: "categories",
-        localField: "category",
-        foreignField: "_id",
-        as: "category"
-      },
-    },
-    {
+//   if (!products?.length)
+//     return null
 
-      $lookup: {
-        from: "items",
-        localField: "item",
-        foreignField: "_id",
-        as: "item"
-      }
-    },
-    { "$unwind": "$category" },
-    { "$unwind": "$item" },
-  ])
+//   return products[0]
+// }
+// const findByCategoryId = async (categoryID) => {
+//   const products = await Products.aggregate([
+//     {
+//       "$match": {
+//         _id: mongoose.Types.ObjectId(id),
+//       }
+//     },
+//     {
+//       $lookup: {
+//         from: "prices",
+//         localField: "_id",
+//         foreignField: "product",
+//         as: "prices"
+//       }
+//     }
+//   ])
 
-  if (!products?.length)
-    return []
+//   if (!products?.length)
+//     return null
 
-  return products
-}
+//   return products[0]
+// }
 
-const create = async (newProduct) => {
-  const createdProduct = await Products.create(newProduct);
-  return createdProduct;
-}
+// const findAll = async (category = '', item = '') => {
+//   let matchCond = {};
+//   if (category) matchCond['category'] = mongoose.Types.ObjectId(category)
+//   if (item) matchCond['item'] = mongoose.Types.ObjectId(item)
 
-const update = async () => {
-  // to do
-}
+//   const products = await Products.aggregate([
+//     {
+//       "$match": matchCond
+//     },
+//     {
+//       $lookup: {
+//         from: "prices",
+//         localField: "_id",
+//         foreignField: "product",
+//         as: "prices"
+//       },
 
-const remove = async () => {
-  // to doF
-}
+//     },
+//     {
+//       $lookup: {
+//         from: "categories",
+//         localField: "category",
+//         foreignField: "_id",
+//         as: "category"
+//       },
+//     },
+//     {
 
-module.exports = {
-  findById,
-  update,
-  remove,
-  findAll,
-  create,
-  findByCategoryId,
-}
+//       $lookup: {
+//         from: "items",
+//         localField: "item",
+//         foreignField: "_id",
+//         as: "item"
+//       }
+//     },
+//     { "$unwind": "$category" },
+//     { "$unwind": "$item" },
+//   ])
+
+//   if (!products?.length)
+//     return []
+
+//   return products
+// }
+
+// const create = async (newProduct) => {
+//   const createdProduct = await Products.create(newProduct);
+//   return createdProduct;
+// }
+
+// const update = async () => {
+//   // to do
+// }
+
+// const remove = async () => {
+//   // to doF
+// }
+
+// module.exports = {
+//   findById,
+//   update,
+//   remove,
+//   findAll,
+//   create,
+//   findByCategoryId,
+// }
