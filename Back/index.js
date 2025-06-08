@@ -29,6 +29,9 @@ app.use((err, req, res, next) => {
     stack: process.env.NODE_ENV !== 'production' ? err.stack : undefined
   });
 });
+app.use('/products', require('./routes/product'));
+app.use('/uploads', express.static('uploads'));
+
 
 app.get('/', (req, res) => {
   res.send('🎉 Chocobebe API is running!');
