@@ -1,72 +1,77 @@
-// routes/product.js
 const express = require('express');
+const joiValidation = require('../middlewares/joiValidation');
+const auth = require('../middlewares/auth');
+// const { } = require('../schemas'); // You can remove or use schemas if needed
 const router = express.Router();
-const Product = require('../models/Product');
-router.post('/', upload.array('images', 5), async (req, res) => {
+
+const productService = require('../services/product');
+
+// Get product by ID (Protected)
+router.get('/id/:id', auth.ensureSignedIn, async (req, res) => {
   try {
-    const imagePaths = req.files.map(file => `/uploads/${file.filename}`);
-    const product = new Product({
-      ...req.body,
-      images: imagePaths
+    const { id } = req.params;
+    const result = await productService.findById(id);
+    res.json(result);
+  } catch (err) {
+    console.error('Error fetching product by ID:', err);
+    res.status(500).json({ error: 'Failed to fetch product' });
+  }
+});
+
+// Get all products (Public)
+router.get('/all/:category?/:item?', async (req, res) => {
+  try {
+    const { category, item } = req.params;
+    const result = await productService.findAll(category, item);
+    res.json(result);
+  } catch (err) {
+    console.error('Error fetching all products:', err);
+    res.status(500).json({ error: 'Failed to fetch products' });
+  }
+});
+
+// Create product (Public)
+// example route
+router.post('/create', async (req, res, next) => {
+  try {
+    const { title, category, item, user, imageUrl, desc } = req.body;
+
+    const result = await productService.create({
+      title,
+      category,
+      item,
+      user,
+      imageUrl,
+      desc,
     });
 
-    const saved = await product.save();
-    res.json({ success: true, product: saved });
+    res.json(result);
   } catch (err) {
-    res.status(400).json({ success: false, error: err.message });
-  }
-});
-// CREATE a new product
-router.post('/', async (req, res) => {
-  try {
-    const newProduct = new Product(req.body);
-    const savedProduct = await newProduct.save();
-    res.json({ success: true, product: savedProduct });
-  } catch (err) {
-    res.status(400).json({ success: false, error: err.message });
+    next(err); // this triggers the error handler
   }
 });
 
-// READ all products
-router.get('/', async (req, res) => {
+// Update product (Protected)
+router.post('/update', auth.ensureSignedIn, async (req, res) => {
   try {
-    const products = await Product.find();
-    res.json({ success: true, products });
+    const { id, ...data } = req.body;
+    const result = await productService.update(id, data);
+    res.json(result);
   } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
+    console.error('Error updating product:', err);
+    res.status(500).json({ error: 'Failed to update product' });
   }
 });
 
-// READ one product by ID
-router.get('/:id', async (req, res) => {
+// Delete product (Protected)
+router.post('/delete', auth.ensureSignedIn, async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
-    if (!product) return res.status(404).json({ success: false, error: 'Product not found' });
-    res.json({ success: true, product });
+    const { id } = req.body;
+    const result = await productService.delete(id);
+    res.json({ success: true, result });
   } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
-});
-
-// UPDATE product by ID
-router.put('/:id', async (req, res) => {
-  try {
-    const updated = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!updated) return res.status(404).json({ success: false, error: 'Product not found' });
-    res.json({ success: true, product: updated });
-  } catch (err) {
-    res.status(400).json({ success: false, error: err.message });
-  }
-});
-
-// DELETE product by ID
-router.delete('/:id', async (req, res) => {
-  try {
-    const deleted = await Product.findByIdAndDelete(req.params.id);
-    if (!deleted) return res.status(404).json({ success: false, error: 'Product not found' });
-    res.json({ success: true, message: 'Product deleted' });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
+    console.error('Error deleting product:', err);
+    res.status(500).json({ error: 'Failed to delete product' });
   }
 });
 

@@ -16,12 +16,9 @@ require('./configs/session')(app);
 // Connect mongodb
 require('./configs/db')();
 
-
 app.use(require('./routes'));
 
 app.use((err, req, res, next) => {
-  console.error("❌ Global error handler:", err); // log full error
-
   return res.status(500).json({
     success: false,
     code: 0,
@@ -29,15 +26,11 @@ app.use((err, req, res, next) => {
     stack: process.env.NODE_ENV !== 'production' ? err.stack : undefined
   });
 });
-app.use('/products', require('./routes/product'));
-app.use('/uploads', express.static('uploads'));
 
 
-app.get('/', (req, res) => {
-  res.send('🎉 Chocobebe API is running!');
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'Test route working' });
 });
-
-
 
 
 const PORT = process.env.PORT || 3000;
