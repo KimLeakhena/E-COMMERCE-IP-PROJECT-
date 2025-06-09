@@ -18,6 +18,7 @@ router.get('/categorized-items', async (req, res) => {
 })
 
 router.post('/create', auth.ensureSignedIn, async (req, res, next) => {
+  console.log('Body received:', req.body); // 🔍 Add this
   const { name, desc, imageUrl } = req.body;
   const result = await categoryService.create({ name, desc, imageUrl })
   res.json(result);
