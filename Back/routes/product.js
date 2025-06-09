@@ -2,6 +2,7 @@ const express = require('express');
 const auth = require('../middlewares/auth');
 const router = express.Router();
 const productService = require('../services/product');
+const upload = require('../uploads/uploads');
 
 // Get product by ID (Protected)
 router.get('/id/:id', auth.ensureSignedIn, async (req, res) => {
