@@ -35,18 +35,19 @@ router.get('/all', async (req, res) => {
 // Create product with image upload
 router.post('/create', upload.single('image'), async (req, res) => {
   try {
-    const { title, name, price, category, item, desc } = req.body;
-    const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
+    const { name, price, category, shortDesc, fullDesc, variants } = req.body;
+    const image = req.file ? `/uploads/${req.file.filename}` : null;
 
     const result = await productService.create({
-      title,
       name,
       price,
+      shortDesc,
+      fullDesc,
+      variants: variants ? variants.split(',') : [],
+      images: image ? [image] : [],
       category,
-      item,
-      desc,
-      imageUrl,
     });
+
 
     res.json(result);
   } catch (err) {
