@@ -86,7 +86,6 @@ router.get('/products/by-category/:categoryId', async (req, res) => {
   try {
     const categoryId = req.params.categoryId;
 
-    // Validate ObjectId
     if (!mongoose.Types.ObjectId.isValid(categoryId)) {
       return res.status(400).json({ error: 'Invalid category ID' });
     }
@@ -95,9 +94,10 @@ router.get('/products/by-category/:categoryId', async (req, res) => {
 
     res.json({ success: true, data: products });
   } catch (err) {
-    console.error('Route error:', err.message);
-    res.status(500).json({ error: 'Failed to get products by category' });
+    console.error('Route error:', err);
+    res.status(500).json({ error: err.message || 'Failed to get products by category' });
   }
 });
+
 
 module.exports = router;
