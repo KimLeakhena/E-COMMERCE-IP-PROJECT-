@@ -35,11 +35,13 @@ router.get('/all', async (req, res) => {
 // Create product with image upload
 router.post('/create', upload.single('image'), async (req, res) => {
   try {
-    const { title, category, item, desc } = req.body;
+    const { title, name, price, category, item, desc } = req.body;
     const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
 
     const result = await productService.create({
       title,
+      name,
+      price,
       category,
       item,
       desc,
@@ -48,10 +50,11 @@ router.post('/create', upload.single('image'), async (req, res) => {
 
     res.json(result);
   } catch (err) {
-    console.error('Error creating product:', err);
-    res.status(500).json({ error: 'Failed to create product' });
+    console.error('Error creating product:', err.message);
+    res.status(500).json({ success: false, error: err.message });
   }
 });
+
 
 
 // Update product (Protected)

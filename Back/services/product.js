@@ -79,7 +79,7 @@ const findAll = async (category = '', item = '', search = '', page = 1, limit = 
 
 const create = async (newProduct) => {
   const createdProduct = await Products.create(newProduct);
-  return createdProduct;
+  return await createdProduct.save();
 };
 
 const update = async (id, data) => {
