@@ -26,9 +26,25 @@ const findById = async (id) => {
 const findAll = async (category = '', item = '', search = '', page = 1, limit = 10) => {
   let matchCond = {};
 
-  if (category) matchCond['category'] = mongoose.Types.ObjectId(category);
-  if (item) matchCond['item'] = mongoose.Types.ObjectId(item);
-  if (search) matchCond['$text'] = { $search: search };
+  if (category) {
+    try {
+      matchCond['category'] = mongoose.Types.ObjectId(category);
+    } catch {
+      console.error('Invalid category id:', category);
+    }
+  }
+  if (item) {
+    try {
+      matchCond['item'] = mongoose.Types.ObjectId(item);
+    } catch {
+      console.error('Invalid item id:', item);
+    }
+  }
+  if (search) {
+    matchCond['$text'] = { $search: search };
+  }
+
+  console.log("Match condition:", matchCond);
 
   const skip = (parseInt(page) - 1) * parseInt(limit);
 
@@ -58,16 +74,17 @@ const findAll = async (category = '', item = '', search = '', page = 1, limit = 
         as: "item"
       }
     },
-    { "$unwind": "$category" },
-    { "$unwind": "$item" },
+    // Temporarily comment out unwind to see if products exist
+    // { "$unwind": "$category" },
+    // { "$unwind": "$item" },
     {
       $project: {
         title: 1,
         desc: 1,
         imageUrl: 1,
         prices: 1,
-        category: { name: "$category.name", _id: "$category._id" },
-        item: { name: "$item.name", _id: "$item._id" }
+        category: { name: { $arrayElemAt: ["$category.name", 0] }, _id: { $arrayElemAt: ["$category._id", 0] } },
+        item: { name: { $arrayElemAt: ["$item.name", 0] }, _id: { $arrayElemAt: ["$item._id", 0] } }
       }
     },
     { $skip: skip },
@@ -76,6 +93,7 @@ const findAll = async (category = '', item = '', search = '', page = 1, limit = 
 
   return products;
 };
+
 
 const create = async (newProduct) => {
   const createdProduct = await Products.create(newProduct);

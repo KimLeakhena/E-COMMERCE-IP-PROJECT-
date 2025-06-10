@@ -1,16 +1,9 @@
-"use strict"
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var categoriesSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  desc: String,
-  imageUrl: String,
-}, {
-  timestamps: true
-});
+const CategorySchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  desc: { type: String },
+  imageUrl: { type: String },
+}, { timestamps: true });
 
-var CategoriesSchema = mongoose.model('Categories', categoriesSchema);
-module.exports = CategoriesSchema;
+module.exports = mongoose.model('Categories', CategorySchema);
