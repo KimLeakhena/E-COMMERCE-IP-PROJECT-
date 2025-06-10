@@ -15,6 +15,35 @@ const findById = async (id) => {
         foreignField: "product",
         as: "prices"
       }
+    },
+    {
+      $addFields: {
+        categoryObjId: {
+          $cond: {
+            if: { $not: [{ $isObjectId: "$category" }] },
+            then: { $toObjectId: "$category" },
+            else: "$category"
+          }
+        }
+      }
+    },
+    {
+      $lookup: {
+        from: "categories",
+        localField: "categoryObjId",
+        foreignField: "_id",
+        as: "category"
+      }
+    },
+    { $unwind: { path: "$category", preserveNullAndEmptyArrays: true } },
+    {
+      $project: {
+        title: 1,
+        desc: 1,
+        imageUrl: 1,
+        prices: 1,
+        category: { name: "$category.name", _id: "$category._id" }
+      }
     }
   ]);
 
@@ -22,6 +51,7 @@ const findById = async (id) => {
 
   return products[0];
 };
+
 
 const findAll = async (category = '', search = '', page = 1, limit = 10) => {
   let matchCond = {};
@@ -37,12 +67,24 @@ const findAll = async (category = '', search = '', page = 1, limit = 10) => {
     matchCond['$text'] = { $search: search };
   }
 
-  console.log("Match condition:", matchCond);
-
   const skip = (parseInt(page) - 1) * parseInt(limit);
 
   const products = await Products.aggregate([
-    { "$match": matchCond },
+    { $match: matchCond },
+
+    // Ensure category field is ObjectId for lookup - if it is string, convert:
+    {
+      $addFields: {
+        categoryObjId: {
+          $cond: {
+            if: { $not: [{ $isObjectId: "$category" }] },
+            then: { $toObjectId: "$category" },
+            else: "$category"
+          }
+        }
+      }
+    },
+
     {
       $lookup: {
         from: "prices",
@@ -54,22 +96,22 @@ const findAll = async (category = '', search = '', page = 1, limit = 10) => {
     {
       $lookup: {
         from: "categories",
-        localField: "category",
+        localField: "categoryObjId",
         foreignField: "_id",
         as: "category"
       }
     },
-    // Temporarily comment out unwind to see if products exist
-    // { "$unwind": "$category" },
-    // { "$unwind": "$item" },
+
+    // Unwind category array to a single object (optional)
+    { $unwind: { path: "$category", preserveNullAndEmptyArrays: true } },
+
     {
       $project: {
         title: 1,
         desc: 1,
         imageUrl: 1,
         prices: 1,
-        category: { name: { $arrayElemAt: ["$category.name", 0] }, _id: { $arrayElemAt: ["$category._id", 0] } },
-
+        category: { name: "$category.name", _id: "$category._id" }
       }
     },
     { $skip: skip },
@@ -78,6 +120,7 @@ const findAll = async (category = '', search = '', page = 1, limit = 10) => {
 
   return products;
 };
+
 
 
 const create = async (newProduct) => {
@@ -97,8 +140,9 @@ const remove = async (id) => {
 
 const getProductsByCategory = async (categoryId) => {
   try {
-    console.log('Fetching products for category:', categoryId);
-    const products = await Products.find({ category: categoryId }).populate('category');
+    const categoryObjId = mongoose.Types.ObjectId(categoryId);
+    console.log('Fetching products for category:', categoryObjId);
+    const products = await Products.find({ category: categoryObjId }).populate('category');
     console.log('Found products:', products.length);
     return products;
   } catch (error) {
@@ -106,6 +150,7 @@ const getProductsByCategory = async (categoryId) => {
     throw error;
   }
 };
+
 
 
 module.exports = {
