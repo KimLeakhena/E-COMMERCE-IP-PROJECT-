@@ -67,9 +67,11 @@ router.post('/create', upload.single('image'), async (req, res) => {
 
 
 // Update product (Protected)
-router.post('/update', auth.ensureSignedIn, async (req, res) => {
+// Update product using PUT and URL param (Protected)
+router.put('/update/:id', async (req, res) => {
   try {
-    const { id, ...data } = req.body;
+    const { id } = req.params;
+    const data = req.body;
     const result = await productService.update(id, data);
     res.json(result);
   } catch (err) {
@@ -77,6 +79,7 @@ router.post('/update', auth.ensureSignedIn, async (req, res) => {
     res.status(500).json({ error: 'Failed to update product' });
   }
 });
+
 
 // Delete product (Protected)
 router.post('/delete', auth.ensureSignedIn, async (req, res) => {
