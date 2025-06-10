@@ -16,13 +16,23 @@ router.get('/categorized-items', async (req, res) => {
   const result = await categoryService.findCategorizedItems()
   res.json(result);
 })
-
 router.post('/create', auth.ensureSignedIn, async (req, res, next) => {
+  try {
+    const { name, desc, imageUrl } = req.body;
 
-  const { name, desc, imageUrl } = req.body;
-  const result = await categoryService.create({ name, desc, imageUrl })
-  res.json(result);
-})
+    if (!name) {
+      return res.status(400).json({ success: false, error: "Name is required" });
+    }
+
+    const result = await categoryService.create({ name, desc, imageUrl });
+
+    res.json({ success: true, data: result });
+  } catch (err) {
+    console.error("Category create error:", err);
+    res.status(500).json({ success: false, code: 0, error: err.message || "Internal Server Error" });
+  }
+});
+
 
 // all categories
 router.get('/all', async (req, res) => {
