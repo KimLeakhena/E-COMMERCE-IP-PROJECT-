@@ -16,9 +16,17 @@ router.get('/categorized-items', async (req, res) => {
   const result = await categoryService.findCategorizedItems()
   res.json(result);
 })
-router.post('/create', auth.ensureSignedIn, async (req, res, next) => {
+
+// router.post('/create', auth.ensureSignedIn, async (req, res, next) => {
+
+//   const { name, desc, imageUrl } = req.body;
+//   const result = await categoryService.create({ name, desc, imageUrl })
+//   res.json(result);
+// })
+
+router.post('/create', async (req, res, next) => {
   try {
-    console.log("Received body:", req.body); // <== Add this
+    console.log("Received body:", req.body);
 
     const { name, desc, imageUrl } = req.body;
 
@@ -30,11 +38,10 @@ router.post('/create', auth.ensureSignedIn, async (req, res, next) => {
 
     res.json({ success: true, data: result });
   } catch (err) {
-    console.error("Error in /category/create:", err); // <== Add this
+    console.error("Error in /category/create:", err);
     res.status(500).json({ success: false, code: 0, error: err.message || "Internal Server Error" });
   }
 });
-
 
 
 // all categories
