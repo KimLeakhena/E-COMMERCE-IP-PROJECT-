@@ -23,7 +23,7 @@ const findById = async (id) => {
   return products[0];
 };
 
-const findAll = async (category = '', item = '', search = '', page = 1, limit = 10) => {
+const findAll = async (category = '', search = '', page = 1, limit = 10) => {
   let matchCond = {};
 
   if (category) {
@@ -31,13 +31,6 @@ const findAll = async (category = '', item = '', search = '', page = 1, limit = 
       matchCond['category'] = mongoose.Types.ObjectId(category);
     } catch {
       console.error('Invalid category id:', category);
-    }
-  }
-  if (item) {
-    try {
-      matchCond['item'] = mongoose.Types.ObjectId(item);
-    } catch {
-      console.error('Invalid item id:', item);
     }
   }
   if (search) {
@@ -66,14 +59,6 @@ const findAll = async (category = '', item = '', search = '', page = 1, limit = 
         as: "category"
       }
     },
-    {
-      $lookup: {
-        from: "items",
-        localField: "item",
-        foreignField: "_id",
-        as: "item"
-      }
-    },
     // Temporarily comment out unwind to see if products exist
     // { "$unwind": "$category" },
     // { "$unwind": "$item" },
@@ -84,7 +69,7 @@ const findAll = async (category = '', item = '', search = '', page = 1, limit = 
         imageUrl: 1,
         prices: 1,
         category: { name: { $arrayElemAt: ["$category.name", 0] }, _id: { $arrayElemAt: ["$category._id", 0] } },
-        item: { name: { $arrayElemAt: ["$item.name", 0] }, _id: { $arrayElemAt: ["$item._id", 0] } }
+
       }
     },
     { $skip: skip },
