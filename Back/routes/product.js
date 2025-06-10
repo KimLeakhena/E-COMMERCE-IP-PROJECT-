@@ -20,15 +20,23 @@ router.get('/id/:id', auth.ensureSignedIn, async (req, res) => {
 });
 
 // Get all products with optional filters (Public)
+
+
+// router.get('/all', async (req, res) => {
+//   try {
+
+//     const result = await productService.findAll(category, search, page, limit);
+//     res.json(result);
+//   } catch (err) {
+//     console.error('Error fetching all products:', err);
+//     res.status(500).json({ error: 'Failed to fetch products' });
+//   }
+// });
+
 router.get('/all', async (req, res) => {
-  try {
-    const { category, item, search, page = 1, limit = 10 } = req.query;
-    const result = await productService.findAll(category, item, search, page, limit);
-    res.json(result);
-  } catch (err) {
-    console.error('Error fetching all products:', err);
-    res.status(500).json({ error: 'Failed to fetch products' });
-  }
+
+  const result = await productService.findAll();
+  res.json(result);
 });
 
 
