@@ -18,6 +18,8 @@ router.get('/categorized-items', async (req, res) => {
 })
 router.post('/create', auth.ensureSignedIn, async (req, res, next) => {
   try {
+    console.log("Received body:", req.body); // <== Add this
+
     const { name, desc, imageUrl } = req.body;
 
     if (!name) {
@@ -28,10 +30,11 @@ router.post('/create', auth.ensureSignedIn, async (req, res, next) => {
 
     res.json({ success: true, data: result });
   } catch (err) {
-    console.error("Category create error:", err);
+    console.error("Error in /category/create:", err); // <== Add this
     res.status(500).json({ success: false, code: 0, error: err.message || "Internal Server Error" });
   }
 });
+
 
 
 // all categories

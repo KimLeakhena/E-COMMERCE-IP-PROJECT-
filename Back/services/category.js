@@ -39,15 +39,12 @@ const findCategorizedItems = async () => {
 const create = async (newCategory) => {
   try {
     const createdCate = await Categories.create(newCategory);
-    return {
-      success: true,
-      data: createdCate,
-    };
+    return createdCate;
   } catch (error) {
-    console.error('Error creating category:', error);
-    throw error;  // Rethrow to handle in controller
+    console.error("categoryService.create error:", error);
+    throw error;
   }
-}
+};
 
 
 const update = async () => {
