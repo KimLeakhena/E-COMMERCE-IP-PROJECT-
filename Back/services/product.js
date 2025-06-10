@@ -110,9 +110,20 @@ const remove = async (id) => {
   return deleted;
 };
 
+const getProductsByCategory = async (categoryId) => {
+  try {
+    const products = await Products.find({ category: categoryId }).populate('category');
+    return products;
+  } catch (error) {
+    console.error('Error fetching products by category:', error);
+    throw error;
+  }
+};
+
 module.exports = {
   findById,
   findAll,
+  getProductsByCategory,
   create,
   update,
   remove

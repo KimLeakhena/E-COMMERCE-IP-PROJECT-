@@ -82,4 +82,13 @@ router.post('/delete', auth.ensureSignedIn, async (req, res) => {
   }
 });
 
+router.get('by-category/:categoryId', async (req, res) => {
+  try {
+    const products = await getProductsByCategory(req.params.categoryId);
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to get products by category' });
+  }
+});
+
 module.exports = router;
