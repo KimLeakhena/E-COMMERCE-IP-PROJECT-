@@ -82,11 +82,20 @@ router.post('/delete', auth.ensureSignedIn, async (req, res) => {
   }
 });
 
-router.get('/by-category/:categoryId', async (req, res) => {
+router.get('/products/by-category/:categoryId', async (req, res) => {
   try {
-    const products = await getProductsByCategory(req.params.categoryId);
-    res.json(products);
+    const categoryId = req.params.categoryId;
+
+    // Validate ObjectId
+    if (!mongoose.Types.ObjectId.isValid(categoryId)) {
+      return res.status(400).json({ error: 'Invalid category ID' });
+    }
+
+    const products = await getProductsByCategory(categoryId);
+
+    res.json({ success: true, data: products });
   } catch (err) {
+    console.error('Route error:', err.message);
     res.status(500).json({ error: 'Failed to get products by category' });
   }
 });
