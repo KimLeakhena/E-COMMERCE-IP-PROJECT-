@@ -82,7 +82,7 @@ router.post('/delete', auth.ensureSignedIn, async (req, res) => {
   }
 });
 
-router.get('by-category/:categoryId', async (req, res) => {
+router.get('/by-category/:categoryId', async (req, res) => {
   try {
     const products = await getProductsByCategory(req.params.categoryId);
     res.json(products);
