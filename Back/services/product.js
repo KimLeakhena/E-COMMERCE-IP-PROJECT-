@@ -1,60 +1,64 @@
 
 const Product = require("../models/products");
 const mongoose = require('mongoose');
+const findAll = async () => {
+  try {
+    const products = await Product.find().populate('category');
+    return { success: true, data: products };
+  } catch (error) {
+    console.error('findAll error:', error.message);
+    throw error;
+  }
+}
 
 const findById = async (id) => {
-  const products = await Product.aggregate([
-    {
-      "$match": {
-        _id: mongoose.Types.ObjectId(id),
-      }
-    },
-    {
-      $lookup: {
-        from: "prices",
-        localField: "_id",
-        foreignField: "product",
-        as: "prices"
-      }
-    },
-    {
-      $addFields: {
-        categoryObjId: {
-          $cond: {
-            if: { $not: [{ $isObjectId: "$category" }] },
-            then: { $toObjectId: "$category" },
-            else: "$category"
+  try {
+    const objectId = new mongoose.Types.ObjectId(id); // ensure it's a valid ObjectId
+
+    const products = await Product.aggregate([
+      { $match: { _id: objectId } },
+      {
+        $lookup: {
+          from: "prices",
+          localField: "_id",
+          foreignField: "product",
+          as: "prices"
+        }
+      },
+      {
+        $lookup: {
+          from: "categories",
+          localField: "category",
+          foreignField: "_id",
+          as: "category"
+        }
+      },
+      { $unwind: { path: "$category", preserveNullAndEmptyArrays: true } },
+      {
+        $project: {
+          name: 1,
+          images: 1,
+          price: 1,
+          shortDesc: 1,
+          fullDesc: 1,
+          variants: 1,
+          prices: 1,
+          category: {
+            name: "$category.name",
+            _id: "$category._id"
           }
         }
       }
-    },
-    {
-      $lookup: {
-        from: "categories",
-        localField: "categoryObjId",
-        foreignField: "_id",
-        as: "category"
-      }
-    },
-    { $unwind: { path: "$category", preserveNullAndEmptyArrays: true } },
-    {
-      $project: {
-        title: 1,
-        desc: 1,
-        imageUrl: 1,
-        prices: 1,
-        category: { name: "$category.name", _id: "$category._id" }
-      }
-    }
-  ]);
+    ]);
 
-  if (!products?.length) return null;
+    if (!products.length) return null;
 
-  return products[0];
-}
-const findAll = async () => {
-  return await Product.find();
-}
+    return products[0];
+  } catch (err) {
+    console.error("Error fetching product by ID:", err.message);
+    throw new Error("Invalid product ID format");
+  }
+};
 
 // const findAll = async (category = '', search = '', page = 1, limit = 10) => {
 //   let matchCond = {};
@@ -157,8 +161,8 @@ const getProductsByCategory = async (categoryId) => {
 
 
 module.exports = {
-  findById,
   findAll,
+  findById,
   getProductsByCategory,
   create,
   update,

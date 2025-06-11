@@ -3,28 +3,32 @@ const auth = require('../middlewares/auth');
 const router = express.Router();
 const productService = require('../services/product');
 const upload = require('../uploads/uploads');
+const mongoose = require('mongoose');
+
+router.get('/list', async (req, res) => {
+  try {
+    const products = await Product.find().populate('category');
+    res.status(200).json({ success: true, data: products });
+  } catch (error) {
+    console.error('Error fetching product list:', error.message);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
 
 // Get product by ID (Protected)
 router.get('/:id', async (req, res) => {
   try {
-    const { id } = req.params;
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ success: false, error: 'Invalid product ID format' });
+    const product = await productService.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ success: false, message: 'Product not found' });
     }
-
-    const result = await productService.findById(id);
-
-    if (!result) {
-      return res.status(404).json({ success: false, error: 'Product not found' });
-    }
-
-    res.json({ success: true, data: result });
-  } catch (err) {
-    console.error('Error fetching product by ID:', err.message);
-    res.status(500).json({ success: false, error: 'Failed to fetch product' });
+    res.status(200).json({ success: true, data: product });
+  } catch (error) {
+    console.error('Error fetching product by ID:', error.message);
+    res.status(400).json({ success: false, error: error.message });
   }
 });
+
 
 
 // Get all products with optional filters (Public)
@@ -41,11 +45,16 @@ router.get('/:id', async (req, res) => {
 //   }
 // });
 
-router.get('/all', async (req, res) => {
-
-  const result = await productService.findAll();
-  res.json(result);
+router.get('/list', async (req, res) => {
+  try {
+    const result = await productService.findAll();
+    res.status(200).json(result);
+  } catch (error) {
+    console.error('Error fetching product list:', error.message);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
 });
+
 
 
 
