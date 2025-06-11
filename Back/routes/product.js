@@ -39,12 +39,20 @@ router.get('/all', async (req, res) => {
   res.json(result);
 });
 
+router.post('/upload/multiple', upload.array('images', 10), (req, res) => {
+  try {
+    const filePaths = req.files.map((file) => `/uploads/${file.filename}`);
+    res.json({ success: true, imageUrls: filePaths });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Upload failed' });
+  }
+});
 
 // Create product with image upload
-router.post('/create', upload.array('images', 10), async (req, res) => {
+router.post('/product/create', async (req, res) => {
   try {
-    const { name, price, category, shortDesc, fullDesc, variants } = req.body;
-    const images = req.files.map(file => `/uploads/${file.filename}`);
+    const { name, price, category, shortDesc, fullDesc, variants, images } = req.body;
 
     const result = await productService.create({
       name,
@@ -52,10 +60,9 @@ router.post('/create', upload.array('images', 10), async (req, res) => {
       shortDesc,
       fullDesc,
       variants: variants ? variants.split(',') : [],
-      images,
+      images: images || [], // This is now an array of image URLs
       category,
     });
-
 
     res.json(result);
   } catch (err) {
@@ -63,6 +70,7 @@ router.post('/create', upload.array('images', 10), async (req, res) => {
     res.status(500).json({ success: false, error: err.message });
   }
 });
+
 
 
 
