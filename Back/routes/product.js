@@ -8,10 +8,18 @@ const upload = require('../uploads/uploads');
 router.get('/id/:id', async (req, res) => {
   try {
     const { id } = req.params;
+
+    // Validate ObjectId before querying
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'Invalid product ID format' });
+    }
+
     const result = await productService.findById(id);
+
     if (!result) {
       return res.status(404).json({ error: 'Product not found' });
     }
+
     res.json(result);
   } catch (err) {
     console.error('Error fetching product by ID:', err);

@@ -2,55 +2,32 @@ const Products = require("../models/products");
 const mongoose = require('mongoose');
 
 const findById = async (id) => {
-  const products = await Products.aggregate([
-    {
-      "$match": {
-        _id: mongoose.Types.ObjectId(id),
-      }
-    },
-    {
-      $lookup: {
-        from: "prices",
-        localField: "_id",
-        foreignField: "product",
-        as: "prices"
-      }
-    },
-    {
-      $addFields: {
-        categoryObjId: {
-          $cond: {
-            if: { $not: [{ $isObjectId: "$category" }] },
-            then: { $toObjectId: "$category" },
-            else: "$category"
-          }
+  try {
+    const products = await Products.aggregate([
+      {
+        "$match": {
+          _id: mongoose.Types.ObjectId(id),
+        }
+      },
+      {
+        $lookup: {
+          from: "prices",
+          localField: "_id",
+          foreignField: "product",
+          as: "prices"
         }
       }
-    },
-    {
-      $lookup: {
-        from: "categories",
-        localField: "categoryObjId",
-        foreignField: "_id",
-        as: "category"
-      }
-    },
-    { $unwind: { path: "$category", preserveNullAndEmptyArrays: true } },
-    {
-      $project: {
-        title: 1,
-        desc: 1,
-        imageUrl: 1,
-        prices: 1,
-        category: { name: "$category.name", _id: "$category._id" }
-      }
-    }
-  ]);
+    ]);
 
-  if (!products?.length) return null;
+    if (!products?.length) return null;
 
-  return products[0];
+    return products[0];
+  } catch (err) {
+    console.error('Error in findById:', err);
+    throw err;  // Let route handler catch and return 500
+  }
 };
+
 const findAll = async () => {
   return await Products.find();
 }
