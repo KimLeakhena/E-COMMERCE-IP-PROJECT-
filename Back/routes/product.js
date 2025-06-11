@@ -8,16 +8,24 @@ const upload = require('../uploads/uploads');
 router.get('/id/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const result = await productService.findById(id);
-    if (!result) {
-      return res.status(404).json({ error: 'Product not found' });
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ success: false, error: 'Invalid product ID format' });
     }
-    res.json(result);
+
+    const result = await productService.findById(id);
+
+    if (!result) {
+      return res.status(404).json({ success: false, error: 'Product not found' });
+    }
+
+    res.json({ success: true, data: result });
   } catch (err) {
-    console.error('Error fetching product by ID:', err);
-    res.status(500).json({ error: 'Failed to fetch product' });
+    console.error('Error fetching product by ID:', err.message);
+    res.status(500).json({ success: false, error: 'Failed to fetch product' });
   }
 });
+
 
 // Get all products with optional filters (Public)
 
