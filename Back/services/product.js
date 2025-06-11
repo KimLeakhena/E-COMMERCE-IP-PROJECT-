@@ -155,6 +155,14 @@ const getProductsByCategory = async (categoryId) => {
     throw error;
   }
 };
+async function findById(id) {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    throw new Error('Invalid product ID');
+  }
+
+  const product = await Product.findById(id);
+  return product;
+}
 
 
 
@@ -164,5 +172,6 @@ module.exports = {
   getProductsByCategory,
   create,
   update,
-  remove
+  remove,
+  findById,
 };
