@@ -28,7 +28,7 @@ router.get('/:id', async (req, res) => {
 router.get('/all', async (req, res) => {
 
 
-  const result = await productService.findAll(category, search, page, limit);
+  const result = await productService.findAll();
   res.json(result);
 
 });
