@@ -5,7 +5,7 @@ const productService = require('../services/product');
 const upload = require('../uploads/uploads');
 
 // Get product by ID (Protected)
-router.get('/id/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
 
