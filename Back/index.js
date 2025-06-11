@@ -23,7 +23,7 @@ app.use(express.json()); // ✅ This is critical
 // If you're also sending form data, add:
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 app.use((err, req, res, next) => {
   return res.status(500).json({

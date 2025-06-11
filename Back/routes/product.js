@@ -41,13 +41,14 @@ router.get('/all', async (req, res) => {
 
 router.post('/upload/multiple', upload.array('images', 10), (req, res) => {
   try {
-    const filePaths = req.files.map((file) => `/uploads/${file.filename}`);
+    const filePaths = req.files.map(file => `/uploads/${file.filename}`);
     res.json({ success: true, imageUrls: filePaths });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Upload failed' });
   }
 });
+
 
 // Create product with image upload
 router.post('/create', async (req, res) => {
