@@ -45,7 +45,9 @@ router.get('/all', async (req, res) => {
 
   const result = await productService.findAll();
   res.json(result);
+
 });
+
 
 router.post('/upload/multiple', upload.array('images', 10), (req, res) => {
   try {

@@ -50,7 +50,7 @@ const findById = async (id) => {
   if (!products?.length) return null;
 
   return products[0];
-};
+}
 const findAll = async () => {
   return await Products.find();
 }
