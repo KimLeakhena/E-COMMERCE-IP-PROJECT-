@@ -53,13 +53,7 @@ const findById = async (id) => {
   return products[0];
 }
 const findAll = async () => {
-  try {
-    const products = await Product.find();
-    return { success: true, data: products };
-  } catch (error) {
-    console.error('Database error in findAll:', error);
-    throw error;
-  }
+  return await Product.find();
 }
 
 // const findAll = async (category = '', search = '', page = 1, limit = 10) => {
@@ -133,17 +127,17 @@ const findAll = async () => {
 
 
 const create = async (newProduct) => {
-  const createdProduct = await Products.create(newProduct);
+  const createdProduct = await Product.create(newProduct);
   return await createdProduct.save();
 };
 
 const update = async (id, data) => {
-  const updated = await Products.findByIdAndUpdate(id, data, { new: true });
+  const updated = await Product.findByIdAndUpdate(id, data, { new: true });
   return updated;
 };
 
 const remove = async (id) => {
-  const deleted = await Products.findByIdAndDelete(id);
+  const deleted = await Product.findByIdAndDelete(id);
   return deleted;
 };
 
@@ -151,7 +145,7 @@ const getProductsByCategory = async (categoryId) => {
   try {
     const categoryObjId = mongoose.Types.ObjectId(categoryId);
     console.log('Fetching products for category:', categoryObjId);
-    const products = await Products.find({ category: categoryObjId }).populate('category');
+    const products = await Product.find({ category: categoryObjId }).populate('category');
     console.log('Found products:', products.length);
     return products;
   } catch (error) {

@@ -5,7 +5,7 @@ const { } = require('../schemas');
 var router = express.Router();
 const categoryService = require('../services/category');
 
-router.get('/id/:id', auth.ensureSignedIn, async function (req, res) {
+router.get('/id/:id', async function (req, res) {
   const { id } = req.params;
   const result = await categoryService.findById(id);
   res.json(result);

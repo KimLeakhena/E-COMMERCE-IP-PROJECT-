@@ -42,13 +42,9 @@ router.get('/:id', async (req, res) => {
 // });
 
 router.get('/all', async (req, res) => {
-  try {
-    const result = await productService.findAll();
-    res.json(result);
-  } catch (err) {
-    console.error('Error fetching all products:', err);
-    res.status(500).json({ error: 'Failed to fetch products' });
-  }
+
+  const result = await productService.findAll();
+  res.json(result);
 });
 
 
