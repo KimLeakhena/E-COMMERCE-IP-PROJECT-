@@ -5,15 +5,6 @@ const productService = require('../services/product');
 const upload = require('../uploads/uploads');
 const mongoose = require('mongoose');
 
-router.get('/list', async (req, res) => {
-  try {
-    const products = await productService.find().populate('category');
-    res.status(200).json({ success: true, data: products });
-  } catch (error) {
-    console.error('Error fetching product list:', error.message);
-    res.status(500).json({ success: false, error: error.message });
-  }
-});
 
 // Get product by ID (Protected)
 router.get('/:id', async (req, res) => {
@@ -34,16 +25,13 @@ router.get('/:id', async (req, res) => {
 // Get all products with optional filters (Public)
 
 
-// router.get('/all', async (req, res) => {
-//   try {
+router.get('/all', async (req, res) => {
 
-//     const result = await productService.findAll(category, search, page, limit);
-//     res.json(result);
-//   } catch (err) {
-//     console.error('Error fetching all products:', err);
-//     res.status(500).json({ error: 'Failed to fetch products' });
-//   }
-// });
+
+  const result = await productService.findAll(category, search, page, limit);
+  res.json(result);
+
+});
 
 
 

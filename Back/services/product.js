@@ -1,14 +1,12 @@
 
 const Product = require("../models/products");
 const mongoose = require('mongoose');
+
 const findAll = async () => {
-  try {
-    const products = await Product.find().populate('category');
-    return { success: true, data: products };
-  } catch (error) {
-    console.error('findAll error:', error.message);
-    throw error;
-  }
+
+  const products = await Product.find();
+  return { success: true, data: products };
+
 }
 
 const findById = async (id) => {
