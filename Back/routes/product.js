@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 router.get('/list', async (req, res) => {
   try {
-    const products = await Product.find().populate('category');
+    const products = await productService.find().populate('category');
     res.status(200).json({ success: true, data: products });
   } catch (error) {
     console.error('Error fetching product list:', error.message);
@@ -45,15 +45,6 @@ router.get('/:id', async (req, res) => {
 //   }
 // });
 
-router.get('/list', async (req, res) => {
-  try {
-    const result = await productService.findAll();
-    res.status(200).json(result);
-  } catch (error) {
-    console.error('Error fetching product list:', error.message);
-    res.status(500).json({ success: false, message: 'Server error' });
-  }
-});
 
 
 
