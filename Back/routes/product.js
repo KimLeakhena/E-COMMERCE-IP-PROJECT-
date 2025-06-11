@@ -50,7 +50,7 @@ router.post('/upload/multiple', upload.array('images', 10), (req, res) => {
 });
 
 // Create product with image upload
-router.post('/product/create', async (req, res) => {
+router.post('/create', async (req, res) => {
   try {
     const { name, price, category, shortDesc, fullDesc, variants, images } = req.body;
 
