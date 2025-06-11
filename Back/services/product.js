@@ -1,8 +1,9 @@
-const Products = require("../models/products");
+
+const Product = require("../models/products");
 const mongoose = require('mongoose');
 
 const findById = async (id) => {
-  const products = await Products.aggregate([
+  const products = await Product.aggregate([
     {
       "$match": {
         _id: mongoose.Types.ObjectId(id),
@@ -52,7 +53,13 @@ const findById = async (id) => {
   return products[0];
 }
 const findAll = async () => {
-  return await Products.find();
+  try {
+    const products = await Product.find();
+    return { success: true, data: products };
+  } catch (error) {
+    console.error('Database error in findAll:', error);
+    throw error;
+  }
 }
 
 // const findAll = async (category = '', search = '', page = 1, limit = 10) => {

@@ -42,11 +42,15 @@ router.get('/:id', async (req, res) => {
 // });
 
 router.get('/all', async (req, res) => {
-
-  const result = await productService.findAll();
-  res.json(result);
-
+  try {
+    const result = await productService.findAll();
+    res.json(result);
+  } catch (err) {
+    console.error('Error fetching all products:', err);
+    res.status(500).json({ error: 'Failed to fetch products' });
+  }
 });
+
 
 
 router.post('/upload/multiple', upload.array('images', 10), (req, res) => {
