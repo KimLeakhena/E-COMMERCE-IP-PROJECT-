@@ -1,7 +1,9 @@
+// models/Product.js
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const productSchema = new mongoose.Schema({
+const productSchema = new Schema({
   name: { type: String, required: true },
   sku: { type: String, unique: true },
   price: { type: Number, required: true },
@@ -14,22 +16,22 @@ const productSchema = new mongoose.Schema({
   category: {
     type: Schema.Types.ObjectId,
     ref: 'Categories',
-    required: true
-  }
+    required: true,
+  },
 }, {
-  timestamps: true
+  timestamps: true,
 });
 
-// Generate SKU like CHOCO-XYZ123 based on name
 productSchema.pre('save', function (next) {
   if (!this.sku && this.name) {
     const namePrefix = this.name
       .toUpperCase()
-      .replace(/[^A-Z0-9]/g, '') // Remove special characters/spaces
-      .substring(0, 5);           // Limit to first 5 characters
-
-    const randomSuffix = Math.random().toString(36).substring(2, 7).toUpperCase(); // 5 random alphanumeric chars
+      .replace(/[^A-Z0-9]/g, '')
+      .substring(0, 5);
+    const randomSuffix = Math.random().toString(36).substring(2, 7).toUpperCase();
     this.sku = `${namePrefix}-${randomSuffix}`;
   }
   next();
 });
+
+module.exports = mongoose.model('Product', productSchema); // ✅ Correct export

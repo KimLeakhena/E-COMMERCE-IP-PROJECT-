@@ -129,8 +129,8 @@ const findAll = async () => {
 
 
 const create = async (newProduct) => {
-  const createdProduct = await Product.create(newProduct);
-  return await createdProduct.save();
+  const product = new Product(newProduct); // triggers pre-save
+  return await product.save();             // saves the product
 };
 
 const update = async (id, data) => {
