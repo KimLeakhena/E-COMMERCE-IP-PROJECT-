@@ -1,4 +1,4 @@
-<script >
+<script>
 import authApi from "../../libs/apis/auth";
 export default {
   async mounted() {},
@@ -11,23 +11,13 @@ export default {
 };
 </script>
 
-<template >
+<template>
   <main>
     <div class="bg-gray-500 text-white py-2 text-lg text-center relative">
       <h1>You're in Dashboard Page</h1>
       <div
         v-on:click="onLogout()"
-        class="
-          absolute
-          text-white
-          right-2
-          top-2
-          bg-gray-400
-          hover:bg-yellow-400
-          px-2
-          rounded-md
-          cursor-pointer
-        "
+        class="absolute text-white right-2 top-2 bg-gray-400 hover:bg-yellow-400 px-2 rounded-md cursor-pointer"
       >
         Logout
       </div>
@@ -53,5 +43,4 @@ export default {
   </main>
 </template>
 
-<style>
-</style>
+<style></style>

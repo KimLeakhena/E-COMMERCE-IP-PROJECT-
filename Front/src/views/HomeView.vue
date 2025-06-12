@@ -104,36 +104,16 @@ import { RouterLink } from 'vue-router';
           class="mx-auto grid max-w-8xl grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
         >
           <ProductCard
-            image="/image/IMG_3343.JPG"
-            title="Choco Day"
-            location="Lisbon, Portugal"
-            price="$5.00"
+            v-for="product in products"
+            :key="product._id"
+            :id="product._id"
+            :image="`https://chocobebe.xyz${product.images?.[0]}`"
+            :title="product.name"
+            :location="product.variants.join(', ')"
+            :price="
+              '$' + product.price ? '$' + product.price.toFixed(2) : 'N/A'
+            "
           />
-          <ProductCard
-            image="/image/IMG_3348.JPG"
-            title="Charming Glass"
-            location="refreshing, sweeet"
-            price="$4.00"
-          />
-          <ProductCard
-            image="/image/IMG_3351.JPG"
-            title="Glass Mat"
-            location="soft , stylist"
-            price="$2.00"
-          />
-          <ProductCard
-            image="/image/IMG_3358.JPG"
-            title="Choco Mug"
-            location="Adorable designs ,cute"
-            price="$5.00"
-          />
-          <ProductCard
-            image="/image/IMG_3355.JPG"
-            title="Wooden Cat Glass Mat"
-            location="cute paw, cozy charm"
-            price="$4.00"
-          />
-
           <!-- <article
             class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300"
           >
@@ -266,10 +246,11 @@ import { RouterLink } from 'vue-router';
               :key="index"
             >
               <img
-                :src="item.image"
-                :alt="item.title"
+                :src="`https://chocobebe.xyz${item.images?.[0]}`"
+                :alt="item.name"
                 class="w-full rounded-xl h-auto object-cover rounded-lg"
               />
+              <p class="mt-2 text-center">{{ item.name }}</p>
             </div>
           </div>
         </div>
@@ -448,15 +429,30 @@ import HeadphoneWidget from "@/components/poster.vue";
 import Slider from "@/components/Slider.vue";
 import ProductCard from "../components/ProductCard.vue";
 import Footers from "../components/Footers.vue";
+import categoryApi from "../libs/apis/category";
+import itemApi from "../libs/apis/item";
+import productApi from "../libs/apis/product";
 
 export default {
   data() {
     return {
+      categories: [],
+      items: [],
+      products: [],
+      title: "",
+      imageUrl: "",
+      desc: "",
+      categoryId: "",
+      itemId: "",
+      priceModalShown: false,
+      selectedProduct: null,
+      price: "",
+      source: "",
       currentIndex: 0,
 
       autoSlideInterval: null,
 
-      items: [
+      bestSellerItems: [
         { title: "Best Seller 1", image: "/image/IMG_3355.JPG" },
         { title: "Best Seller 2", image: "/image/IMG_3374.JPG" },
         { title: "Best Seller 3", image: "/image/IMG_3379.JPG" },
@@ -472,7 +468,7 @@ export default {
             "cute mugs for slow mornings, warm drinks, and soft hearts ☕🍯",
         },
         {
-          image: "https://pbs.twimg.com/media/EWVS1vpU8AE8LAg.jpg",
+          image: "/image/img_3365.jpg",
           tag: "Hot",
           title: "Limited edition product",
           description: "Available now. Don't miss out!",
@@ -483,24 +479,32 @@ export default {
   },
   computed: {
     loopedItems() {
-      return this.items.length > 0
-        ? [...this.items, ...this.items.slice(0, this.visibleItems)]
-        : [];
+      return this.products.length > 0 ? this.products.slice(0, 5) : [];
+    },
+    visibleItems() {
+      return 4; // change this if you want more or fewer visible cards
     },
   },
-
-  mounted() {
-    setInterval(this.nextSlide, 3000);
+  async mounted() {
+    this.categories = await categoryApi.all();
+    this.items = await itemApi.all();
+    this.products = await productApi.all();
+    console.log(this.products);
+    initFlowbite();
   },
-  beforeUnmount() {
-    clearInterval(this.autoSlideInterval);
-  },
-  mounted() {
-    this.startAutoSlide();
-  },
-  beforeUnmount() {
-    clearInterval(this.intervalId);
-  },
+  // mounted() {
+  //   console.log(this.products);
+  //   setInterval(this.nextSlide, 3000);
+  // },
+  // beforeUnmount() {
+  //   clearInterval(this.autoSlideInterval);
+  // },
+  // mounted() {
+  //   this.startAutoSlide();
+  // },
+  // beforeUnmount() {
+  //   clearInterval(this.intervalId);
+  // },
   methods: {
     startAutoSlide() {
       this.intervalId = setInterval(this.nextSlide, this.interval);

@@ -1,4 +1,4 @@
-<script >
+<script>
 import categoryApi from "../../libs/apis/category";
 import itemApi from "../../libs/apis/item";
 
@@ -6,7 +6,6 @@ export default {
   data() {
     return {
       categories: [],
-      items: [],
       name: "",
       categoryId: "",
       desc: "",
@@ -33,7 +32,7 @@ export default {
 };
 </script>
 
-<template >
+<template>
   <main>
     <div class="bg-gray-500 text-white py-2 text-lg text-center">
       <h1>Item</h1>

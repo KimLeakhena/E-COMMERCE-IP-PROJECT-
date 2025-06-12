@@ -5,7 +5,23 @@ import { RouterLink } from 'vue-router';
     <Navbar />
 
     <main>
-      <ProductDetail />
+      <ProductDetail
+        v-if="product"
+        :id="product._id"
+        :title="product.name"
+        :sku="product.sku"
+        :price="'$' + product.price ? '$' + product.price.toFixed(2) : 'N/A'"
+        :originalPrice="product.originalPrice"
+        :shortDesc="product.description"
+        :longDesc="product.fullDesc"
+        :displayImage="`https://chocobebe.xyz${product.images?.[0]}`"
+        :thumbnails="
+          product.images
+            ? product.images.map((img) => `https://chocobebe.xyz${img}`)
+            : []
+        "
+        :features="product.features"
+      />
       <!-- forrelatetoproduct -->
       <div>
         <hr class="my-5 mx-8 h-1 border-t-0 bg-[#CAC0C0]" />
@@ -51,25 +67,32 @@ import { RouterLink } from 'vue-router';
 }
 </style>
 <script>
-import { RouterLink, RouterView } from "vue-router";
+import { useRoute } from "vue-router";
 import productApi from "../libs/apis/product";
 import Navbar from "../components/Navbar.vue";
 import Footers from "../components/Footers.vue";
 import ProductDetail from "../components/ProductDetail.vue";
 import ImageCard from "../components/ImageCard.vue";
+import { initFlowbite } from "flowbite"; // If you're using Flowbite
+
 export default {
   components: { Navbar, Footers, ProductDetail, ImageCard },
   data() {
     return {
-      products: [],
+      product: null,
     };
   },
-  methods: {},
   async mounted() {
-    this.products = await productApi.all();
-  },
-  mounted() {
-    initFlowbite();
+    initFlowbite(); // Optional
+
+    const productId = this.$route.params.id;
+    try {
+      const response = await productApi.getById(productId);
+      console.log("API response:", response.data);
+      this.product = response.data; // Adjust this based on actual structure
+    } catch (err) {
+      console.error("Failed to fetch product:", err);
+    }
   },
 };
 </script>

@@ -1,11 +1,16 @@
 <template>
   <div class="w-full max-w-8xl mx-auto mt-6 p-8">
     <div class="relative w-full overflow-hidden rounded-xl shadow-lg bg-white">
-      <div class="flex transition-transform duration-500 ease-in-out">
+      <!-- Slide track -->
+      <div
+        class="flex transition-transform duration-500 ease-in-out"
+        :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
+      >
         <div
           v-for="(slide, index) in slides"
           :key="index"
           class="w-full flex-shrink-0 p-4"
+          style="min-width: 100%"
         >
           <slot :slide="slide" />
         </div>
