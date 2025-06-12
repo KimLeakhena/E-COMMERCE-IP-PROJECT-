@@ -11,9 +11,9 @@ import { RouterLink } from 'vue-router';
         :title="product.name"
         :sku="product.sku"
         :price="'$' + product.price ? '$' + product.price.toFixed(2) : 'N/A'"
-        :originalPrice="product.originalPrice"
+        :originalPrice="'$' + product.originalPrice.toFixed(2) || '-'"
         :shortDesc="product.description"
-        :longDesc="product.fullDesc"
+        :longDesc="product.description"
         :displayImage="`https://chocobebe.xyz${product.images?.[0]}`"
         :thumbnails="
           product.images

@@ -57,7 +57,7 @@
           </div>
 
           <p class="text-gray-700 mb-6">
-            {{ shortDesc || "every day is a good day with these cute cups 🍞" }}
+            {{ shortDesc }}
           </p>
 
           <div>
@@ -128,13 +128,8 @@ export default {
       default: "https://www.instagram.com/direct/t/cutemugsbychoco/",
     },
     features: {
-      type: Array,
-      default: () => [
-        "🏖 surf day — chill & breezy",
-        "🛒 shopping day — grocery mood",
-        "🌴 summer day — vacation dreams",
-        "☕️ leisure day — slow mornings, soft vibes",
-      ],
+      type: String,
+      required: true,
     },
   },
   data() {
@@ -151,6 +146,11 @@ export default {
         this.mainImage ||
         "https://via.placeholder.com/400x300?text=No+Image"
       );
+    },
+    parsedFeatures() {
+      return Array.isArray(this.features)
+        ? this.features
+        : this.features.split(",").map((f) => f.trim());
     },
   },
 

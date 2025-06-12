@@ -37,13 +37,14 @@ export default {
       const random = Math.random().toString(36).substring(2, 7).toUpperCase();
       return `${prefix}-${random}`;
     },
-    handleFileChange(event) {
+    handleEditFileChange(event) {
       const files = Array.from(event.target.files);
-      this.imageFiles.push(...files);
+      this.editImageFiles.push(...files);
       files.forEach((file) => {
-        this.imagePreviews.push({ file, url: URL.createObjectURL(file) });
+        this.editImagePreviews.push({ file, url: URL.createObjectURL(file) });
       });
     },
+
     removeImage(index) {
       URL.revokeObjectURL(this.imagePreviews[index].url);
       this.imagePreview.splice(index, 1);
@@ -75,7 +76,7 @@ export default {
           sku: newSKU,
           price: parseFloat(this.price),
           originalPrice: parseFloat(this.originalPrice) || undefined,
-          fullDesc: this.fullDesc,
+          description: this.description,
           variants: this.variants,
           features: featuresArr,
           category: this.categoryId,
@@ -90,7 +91,7 @@ export default {
           this.sku =
           this.price =
           this.originalPrice =
-          this.fullDesc =
+          this.description =
             "";
         this.featuresInput = this.variants = this.categoryId = "";
         this.imageFiles = [];
@@ -125,15 +126,43 @@ export default {
     },
     async saveEdit() {
       if (!this.editProduct) return;
+
+      // Upload new images if any
+      let newImageUrls = [];
+      if (this.editImageFiles.length > 0) {
+        const form = new FormData();
+        this.editImageFiles.forEach((img) => form.append("images", img));
+        const uploadRes = await fetch(
+          "https://chocobebe.xyz/product/upload/multiple",
+          {
+            method: "POST",
+            body: form,
+          }
+        );
+
+        if (!uploadRes.ok) {
+          const text = await uploadRes.text();
+          console.error("Upload error:", text);
+          alert("Image upload failed");
+          return;
+        }
+
+        const uploadJson = await uploadRes.json();
+        newImageUrls = uploadJson.imageUrls || [];
+      }
+      const updatedImages = [
+        ...(this.editProduct.images || []),
+        ...newImageUrls,
+      ];
       const res = await productApi.edit(this.editProduct._id, {
         name: this.editProduct.name,
         sku: this.editProduct.sku,
         price: parseFloat(this.editProduct.price),
         originalPrice: parseFloat(this.editProduct.originalPrice),
-        fullDesc: this.editProduct.fullDesc,
+        description: this.editProduct.description,
         variants: this.editProduct.variants,
         features: this.editProduct.features,
-        images: this.editProduct.images,
+        images: updatedImages,
         category: this.editProduct.category,
       });
       if (res?.error) {
@@ -141,7 +170,10 @@ export default {
         return;
       }
       this.editProduct = null;
+      this.editImageFiles = [];
+      this.editImagePreviews = [];
       this.products = await productApi.all();
+      alert("Product updated!");
     },
   },
   async mounted() {
@@ -186,10 +218,7 @@ export default {
             type="text"
             placeholder="Short Description"
           /> -->
-          <textarea
-            v-model="fullDesc"
-            placeholder="Full Description"
-          ></textarea>
+          <textarea v-model="description" placeholder="description"></textarea>
           <input
             v-model="featuresInput"
             placeholder="Features (comma separated)"
@@ -210,15 +239,11 @@ export default {
 
           <div class="flex flex-wrap gap-2 my-2">
             <div
-              v-for="(preview, index) in imagePreviews"
+              v-for="(preview, index) in editImagePreviews"
               :key="index"
               class="relative w-24 h-24 border rounded overflow-hidden"
             >
-              <img
-                :src="preview.url"
-                class="w-full h-full object-cover"
-                alt="Preview"
-              />
+              <img :src="preview.url" class="w-full h-full object-cover" />
               <button
                 @click.prevent="removeImage(index)"
                 class="absolute top-0 right-0 bg-red-600 text-white rounded-full w-5 h-5 text-xs flex items-center justify-center"
@@ -339,16 +364,21 @@ export default {
           placeholder="Price"
           class="w-full border border-gray-300 rounded px-3 py-2"
         />
-        <textarea
+        <!-- <textarea
           v-model="editProduct.shortDesc"
           placeholder="Short Description"
           class="w-full border border-gray-300 rounded px-3 py-2"
-        ></textarea>
+        ></textarea> -->
         <textarea
-          v-model="editProduct.fullDesc"
-          placeholder="Full Description"
+          v-model="editProduct.description"
+          placeholder="description"
           class="w-full border border-gray-300 rounded px-3 py-2"
         ></textarea>
+        <input
+          v-model="editProduct.features"
+          placeholder="Variants (comma separated)"
+          class="w-full border border-gray-300 rounded px-3 py-2"
+        />
         <input
           v-model="editProduct.variants"
           placeholder="Variants (comma separated)"
@@ -371,7 +401,7 @@ export default {
             <img
               :src="preview.url"
               class="w-full h-full object-cover"
-              alt="Preview"
+              alt="Edit Preview"
             />
             <button
               @click.prevent="removeEditImage(index)"
@@ -382,7 +412,18 @@ export default {
             </button>
           </div>
         </div>
-
+        <div class="flex flex-wrap gap-2 my-2">
+          <div
+            v-for="(img, index) in editProduct.images"
+            :key="'existing-' + index"
+            class="relative w-24 h-24 border rounded overflow-hidden"
+          >
+            <img
+              :src="`https://chocobebe.xyz${img}`"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
         <div class="flex justify-between mt-4">
           <button
             @click="saveEdit"

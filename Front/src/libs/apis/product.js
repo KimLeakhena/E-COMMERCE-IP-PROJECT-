@@ -48,7 +48,7 @@ var product = {
     return result?.data?.length ? result.data : [];
   }
   ,
-  async edit(id, { name, price, shortDesc, fullDesc, variants, category, images }) {
+  async edit(id, { name, price, description, variants, category, images, originalPrice, features }) {
     const res = await fetch(`https://chocobebe.xyz/product/update/${id}`, {
       method: "PUT",
       headers: {
@@ -57,11 +57,11 @@ var product = {
       body: JSON.stringify({
         name,
         price,
-        shortDesc,
-        fullDesc,
+        description,
         variants,
         category,
         images,
+        originalPrice, features
       }),
     });
 
