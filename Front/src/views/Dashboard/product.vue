@@ -37,14 +37,20 @@ export default {
       const random = Math.random().toString(36).substring(2, 7).toUpperCase();
       return `${prefix}-${random}`;
     },
-    handleEditFileChange(event) {
+    handleFileChange(event) {
+      const files = Array.from(event.target.files);
+      this.imageFiles.push(...files);
+      files.forEach((file) => {
+        this.imagePreviews.push({ file, url: URL.createObjectURL(file) });
+      });
+    },
+    handleEditImageChange(event) {
       const files = Array.from(event.target.files);
       this.editImageFiles.push(...files);
       files.forEach((file) => {
         this.editImagePreviews.push({ file, url: URL.createObjectURL(file) });
       });
     },
-
     removeImage(index) {
       URL.revokeObjectURL(this.imagePreviews[index].url);
       this.imagePreview.splice(index, 1);
@@ -127,53 +133,57 @@ export default {
     async saveEdit() {
       if (!this.editProduct) return;
 
-      // Upload new images if any
-      let newImageUrls = [];
-      if (this.editImageFiles.length > 0) {
-        const form = new FormData();
-        this.editImageFiles.forEach((img) => form.append("images", img));
-        const uploadRes = await fetch(
-          "https://chocobebe.xyz/product/upload/multiple",
-          {
-            method: "POST",
-            body: form,
-          }
-        );
+      try {
+        // If new images are selected for edit
+        if (this.editImageFiles.length > 0) {
+          const form = new FormData();
+          this.editImageFiles.forEach((img) => form.append("images", img));
+          const uploadRes = await fetch(
+            "https://chocobebe.xyz/product/upload/multiple",
+            {
+              method: "POST",
+              body: form,
+            }
+          );
 
-        if (!uploadRes.ok) {
-          const text = await uploadRes.text();
-          console.error("Upload error:", text);
-          alert("Image upload failed");
+          if (!uploadRes.ok) {
+            const text = await uploadRes.text();
+            console.error("Image upload error:", text);
+            alert("Image upload failed during edit");
+            return;
+          }
+
+          const { imageUrls } = await uploadRes.json();
+          this.editProduct.images = imageUrls;
+        }
+
+        // Save edited product
+        const res = await productApi.edit(this.editProduct._id, {
+          name: this.editProduct.name,
+          sku: this.editProduct.sku,
+          price: parseFloat(this.editProduct.price),
+          originalPrice: parseFloat(this.editProduct.originalPrice),
+          description: this.editProduct.description,
+          variants: this.editProduct.variants,
+          features: this.editProduct.features,
+          images: this.editProduct.images,
+          category: this.editProduct.category,
+        });
+
+        if (res?.error) {
+          alert(res.error);
           return;
         }
 
-        const uploadJson = await uploadRes.json();
-        newImageUrls = uploadJson.imageUrls || [];
+        this.editProduct = null;
+        this.editImageFiles = [];
+        this.editImagePreviews = [];
+        this.products = await productApi.all();
+        alert("Product updated!");
+      } catch (err) {
+        console.error("Edit save error:", err);
+        alert("Something went wrong while saving");
       }
-      const updatedImages = [
-        ...(this.editProduct.images || []),
-        ...newImageUrls,
-      ];
-      const res = await productApi.edit(this.editProduct._id, {
-        name: this.editProduct.name,
-        sku: this.editProduct.sku,
-        price: parseFloat(this.editProduct.price),
-        originalPrice: parseFloat(this.editProduct.originalPrice),
-        description: this.editProduct.description,
-        variants: this.editProduct.variants,
-        features: this.editProduct.features,
-        images: updatedImages,
-        category: this.editProduct.category,
-      });
-      if (res?.error) {
-        alert(res.error);
-        return;
-      }
-      this.editProduct = null;
-      this.editImageFiles = [];
-      this.editImagePreviews = [];
-      this.products = await productApi.all();
-      alert("Product updated!");
     },
   },
   async mounted() {
@@ -239,11 +249,15 @@ export default {
 
           <div class="flex flex-wrap gap-2 my-2">
             <div
-              v-for="(preview, index) in editImagePreviews"
+              v-for="(preview, index) in imagePreviews"
               :key="index"
               class="relative w-24 h-24 border rounded overflow-hidden"
             >
-              <img :src="preview.url" class="w-full h-full object-cover" />
+              <img
+                :src="preview.url"
+                class="w-full h-full object-cover"
+                alt="Preview"
+              />
               <button
                 @click.prevent="removeImage(index)"
                 class="absolute top-0 right-0 bg-red-600 text-white rounded-full w-5 h-5 text-xs flex items-center justify-center"
@@ -317,7 +331,11 @@ export default {
           <td>{{ product.variants }}</td>
           <td>
             <img
-              :src="`https://chocobebe.xyz${product.images?.[0]}`"
+              :src="
+                product.images?.[0]
+                  ? 'https://chocobebe.xyz' + product.images[0]
+                  : '/default.jpg'
+              "
               alt="product image"
               width="80"
             />
@@ -374,11 +392,11 @@ export default {
           placeholder="description"
           class="w-full border border-gray-300 rounded px-3 py-2"
         ></textarea>
-        <input
+        <textarea
           v-model="editProduct.features"
-          placeholder="Variants (comma separated)"
+          placeholder="description"
           class="w-full border border-gray-300 rounded px-3 py-2"
-        />
+        ></textarea>
         <input
           v-model="editProduct.variants"
           placeholder="Variants (comma separated)"
@@ -388,7 +406,7 @@ export default {
           type="file"
           multiple
           accept="image/*"
-          @change="handleEditFileChange"
+          @change="handleEditImageChange"
           class="w-full p-1 rounded border border-gray-300 mb-2"
         />
 
@@ -401,7 +419,7 @@ export default {
             <img
               :src="preview.url"
               class="w-full h-full object-cover"
-              alt="Edit Preview"
+              alt="Preview"
             />
             <button
               @click.prevent="removeEditImage(index)"
@@ -412,18 +430,7 @@ export default {
             </button>
           </div>
         </div>
-        <div class="flex flex-wrap gap-2 my-2">
-          <div
-            v-for="(img, index) in editProduct.images"
-            :key="'existing-' + index"
-            class="relative w-24 h-24 border rounded overflow-hidden"
-          >
-            <img
-              :src="`https://chocobebe.xyz${img}`"
-              class="w-full h-full object-cover"
-            />
-          </div>
-        </div>
+
         <div class="flex justify-between mt-4">
           <button
             @click="saveEdit"

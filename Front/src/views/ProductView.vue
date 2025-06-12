@@ -24,14 +24,17 @@
           >
             Find out about events and other news
           </p>
-          <div
+          <form
+            id="searchForm"
             class="flex w-full justify-center items-center p-6 space-x-6 rounded-xl"
+            @submit.prevent="handleSearch"
           >
             <div class="relative text-gray-600 w-96 max-w-3xl">
               <input
+                v-model="searchQuery"
                 type="search"
                 name="search"
-                placeholder="Search"
+                placeholder="Search by name, description or category"
                 class="w-full bg-white h-[45px] px-5 pr-10 rounded-full text-sm focus:outline-none"
               />
               <button type="submit" class="absolute right-0 top-0 mt-3 mr-4">
@@ -53,7 +56,7 @@
                 </svg>
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
 
@@ -155,7 +158,6 @@
         <div
           class="mx-auto grid max-w-8xl grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
         >
-          <!-- Loop through products array -->
           <ProductCard
             v-for="product in products"
             :key="product._id"
@@ -163,9 +165,7 @@
             :image="`https://chocobebe.xyz${product.images?.[0]}`"
             :title="product.name"
             :location="product.variants.join(', ')"
-            :price="
-              '$' + product.price ? '$' + product.price.toFixed(2) : 'N/A'
-            "
+            :price="product.price ? '$' + product.price.toFixed(2) : 'N/A'"
           />
         </div>
       </section>
@@ -233,7 +233,7 @@
 </template>
 
 <script>
-import { RouterLink, RouterView } from "vue-router";
+import { RouterLink } from "vue-router";
 import categoryApi from "../libs/apis/category";
 import itemApi from "../libs/apis/item";
 import productApi from "../libs/apis/product";
@@ -241,12 +241,20 @@ import productApi from "../libs/apis/product";
 import Navbar from "../components/Navbar.vue";
 import ProductCard from "../components/ProductCard.vue";
 import Footers from "../components/Footers.vue";
+
+// Uncomment this if using Flowbite JS features
+// import { initFlowbite } from "flowbite";
+
 export default {
   data() {
     return {
       categories: [],
       items: [],
       products: [],
+      allProducts: [], // cache for all products
+      searchQuery: "",
+
+      // Optional: Product form state
       title: "",
       imageUrl: "",
       desc: "",
@@ -259,14 +267,40 @@ export default {
     };
   },
   async mounted() {
-    this.categories = await categoryApi.all();
-    this.items = await itemApi.all();
-    this.products = await productApi.all();
-    initFlowbite();
+    try {
+      this.categories = await categoryApi.all();
+      this.items = await itemApi.all();
+
+      // Fetch all products and save to both products and allProducts
+      const all = await productApi.all();
+      this.products = all;
+      this.allProducts = all;
+
+      // Uncomment if using Flowbite tooltips/modal etc.
+      // initFlowbite();
+    } catch (error) {
+      console.error("Error during initial fetch:", error);
+    }
+  },
+  watch: {
+    searchQuery(newQuery) {
+      if (!newQuery.trim()) {
+        this.products = this.allProducts;
+      } else {
+        const lowerQuery = newQuery.toLowerCase();
+        this.products = this.allProducts.filter((product) =>
+          product.name.toLowerCase().includes(lowerQuery)
+        );
+      }
+    },
   },
   methods: {
     async onClick(categoryId, itemId) {
-      this.products = await product.all(categoryId, itemId);
+      try {
+        this.products = await productApi.all(categoryId, itemId);
+      } catch (error) {
+        console.error("Error fetching filtered products:", error);
+      }
     },
   },
   components: { RouterLink, Navbar, ProductCard, Footers },

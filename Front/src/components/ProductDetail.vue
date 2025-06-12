@@ -59,7 +59,14 @@
           <p class="text-gray-700 mb-6">
             {{ shortDesc }}
           </p>
-
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold mb-2">Variants:</h3>
+            <ul class="list-disc list-inside text-gray-700 mb-6">
+              <li v-for="(variant, idx) in variants" :key="idx">
+                {{ variant }}
+              </li>
+            </ul>
+          </div>
           <div>
             <h3 class="text-lg font-semibold mb-2">✨ Features:</h3>
             <ul class="list-disc list-inside text-gray-700 mb-6">
@@ -119,6 +126,9 @@ export default {
     longDesc: String,
     mainImage: String,
     thumbnails: Array,
+    variants: {
+      type: String,
+    },
     alt: {
       type: String,
       default: "Product Image",

@@ -10,8 +10,12 @@ import { RouterLink } from 'vue-router';
         :id="product._id"
         :title="product.name"
         :sku="product.sku"
-        :price="'$' + product.price ? '$' + product.price.toFixed(2) : 'N/A'"
-        :originalPrice="'$' + product.originalPrice.toFixed(2) || '-'"
+        :price="product?.price != null ? '$' + product.price.toFixed(2) : 'N/A'"
+        :originalPrice="
+          product?.originalPrice != null
+            ? '$' + product.originalPrice.toFixed(2)
+            : '-'
+        "
         :shortDesc="product.description"
         :longDesc="product.description"
         :displayImage="`https://chocobebe.xyz${product.images?.[0]}`"
@@ -21,7 +25,9 @@ import { RouterLink } from 'vue-router';
             : []
         "
         :features="product.features"
+        :variants="product.variants"
       />
+
       <!-- forrelatetoproduct -->
       <div>
         <hr class="my-5 mx-8 h-1 border-t-0 bg-[#CAC0C0]" />
