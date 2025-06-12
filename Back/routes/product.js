@@ -59,7 +59,8 @@ router.post('/upload/multiple', upload.array('images', 10), (req, res) => {
 // Create product with image upload
 router.post('/create', async (req, res) => {
   try {
-    const { name, price, category, shortDesc, fullDesc, variants, images } = req.body;
+
+    const { name, price, category, shortDesc, fullDesc, variants, images, description, originalPrice, sku, features } = req.body;
 
     const result = await productService.create({
       name,
@@ -69,6 +70,7 @@ router.post('/create', async (req, res) => {
       variants: variants ? variants.split(',') : [],
       images: images || [], // This is now an array of image URLs
       category,
+      description, originalPrice, features
     });
 
     res.json(result);

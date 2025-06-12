@@ -1,53 +1,35 @@
-'use strict';
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const productSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  images: [{ type: String }],
+  sku: { type: String, unique: true },
   price: { type: Number, required: true },
-  shortDesc: { type: String },
-  fullDesc: { type: String },
+  originalPrice: { type: Number },
+  rating: { type: Number, default: 4.5 },
+  description: { type: String },
+  features: [{ type: String }],
+  images: [{ type: String }],
   variants: [{ type: String }],
   category: {
     type: Schema.Types.ObjectId,
     ref: 'Categories',
     required: true
   }
-
 }, {
   timestamps: true
 });
 
-productSchema.index({ name: 'text' });
+// Generate SKU like CHOCO-XYZ123 based on name
+productSchema.pre('save', function (next) {
+  if (!this.sku && this.name) {
+    const namePrefix = this.name
+      .toUpperCase()
+      .replace(/[^A-Z0-9]/g, '') // Remove special characters/spaces
+      .substring(0, 5);           // Limit to first 5 characters
 
-module.exports = mongoose.model('Product', productSchema);
-
-// "use strict"
-// var mongoose = require('mongoose');
-// const Schema = mongoose.Schema;
-
-// var productSchema = new mongoose.Schema({
-//   title: String,
-//   category: {
-//     type: Schema.Types.ObjectId,
-//     ref: 'Categories'
-//   },
-//   item: {
-//     type: Schema.Types.ObjectId,
-//     ref: 'Items'
-//   },
-//   // artist: {
-//   //   type: Schema.Types.ObjectId,
-//   //   ref: 'artists'
-//   // },
-//   imageUrl: String,
-//   desc: String,
-// }, {
-//   timestamps: true,
-// });
-
-// productSchema.index({ title: 'text' });
-// var Posts = mongoose.model('Products', productSchema);
-// module.exports = Posts;
-
+    const randomSuffix = Math.random().toString(36).substring(2, 7).toUpperCase(); // 5 random alphanumeric chars
+    this.sku = `${namePrefix}-${randomSuffix}`;
+  }
+  next();
+});
