@@ -3,7 +3,7 @@ const auth = require('../middlewares/auth');
 const router = express.Router();
 const productService = require('../services/product');
 const mongoose = require('mongoose');
-const upload = require('../uploads/cloudinary');
+const upload = require('../uploads/cloud');
 
 
 
