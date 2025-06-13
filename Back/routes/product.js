@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const upload = require('../uploads/cloudinary');
 
 
+
 // Get product by ID (Protected)
 // router.get('/:id', async (req, res) => {
 //   try {
