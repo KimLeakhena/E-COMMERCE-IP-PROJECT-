@@ -162,7 +162,7 @@
             v-for="product in products"
             :key="product._id"
             :id="product._id"
-            :image="`https://chocobebe.xyz${product.images?.[0]}`"
+            :image="product.images?.[0]"
             :title="product.name"
             :location="product.variants.join(', ')"
             :price="product.price ? '$' + product.price.toFixed(2) : 'N/A'"

@@ -18,12 +18,8 @@ import { RouterLink } from 'vue-router';
         "
         :shortDesc="product.description"
         :longDesc="product.description"
-        :displayImage="`https://chocobebe.xyz${product.images?.[0]}`"
-        :thumbnails="
-          product.images
-            ? product.images.map((img) => `https://chocobebe.xyz${img}`)
-            : []
-        "
+        :displayImage="product.images?.[0]"
+        :thumbnails="product.images ? product.images.map((img) => img) : []"
         :features="product.features"
         :variants="product.variants"
       />

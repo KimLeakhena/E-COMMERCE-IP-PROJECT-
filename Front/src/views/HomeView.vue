@@ -107,7 +107,7 @@ import { RouterLink } from 'vue-router';
             v-for="product in products.slice(0, 4)"
             :key="product._id"
             :id="product._id"
-            :image="`https://chocobebe.xyz${product.images?.[0]}`"
+            :image="product.images?.[0]"
             :title="product.name"
             :location="product.variants.join(', ')"
             :price="
@@ -246,7 +246,7 @@ import { RouterLink } from 'vue-router';
               :key="index"
             >
               <img
-                :src="`https://chocobebe.xyz${item.images?.[0]}`"
+                :src="item.images?.[0]"
                 :alt="item.name"
                 class="w-full rounded-xl h-auto object-cover rounded-lg"
               />

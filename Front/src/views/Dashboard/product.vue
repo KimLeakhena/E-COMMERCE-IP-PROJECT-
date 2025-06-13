@@ -331,11 +331,7 @@ export default {
           <td>{{ product.variants }}</td>
           <td>
             <img
-              :src="
-                product.images?.[0]
-                  ? 'https://chocobebe.xyz' + product.images[0]
-                  : '/default.jpg'
-              "
+              :src="product.images?.[0] ? product.images[0] : '/default.jpg'"
               alt="product image"
               width="80"
             />
