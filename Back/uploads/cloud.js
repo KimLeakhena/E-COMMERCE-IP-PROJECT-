@@ -1,7 +1,6 @@
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
-
-
+const { CloudinaryStorage } = require('multer-storage-cloudinary'); // ✅ Required import
 require('dotenv').config();
 
 cloudinary.config({
@@ -10,12 +9,11 @@ cloudinary.config({
     api_secret: process.env.CLOUD_API_SECRET,
 });
 
-
-// Cloudinary storage
+// Cloudinary storage setup
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
-        folder: 'chocobebe-products', // ✅ RECOMMENDED: give a clear folder name
+        folder: 'chocobebe-products', // Optional folder name
         allowed_formats: ['jpg', 'png', 'jpeg', 'webp'],
         transformation: [{ width: 800, height: 800, crop: 'limit' }],
     },
@@ -24,4 +22,3 @@ const storage = new CloudinaryStorage({
 const upload = multer({ storage });
 
 module.exports = upload;
-

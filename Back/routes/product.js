@@ -4,6 +4,7 @@ const router = express.Router();
 const productService = require('../services/product');
 const mongoose = require('mongoose');
 const upload = require('../uploads/cloud');
+const Product = require("../models/products");
 
 
 
