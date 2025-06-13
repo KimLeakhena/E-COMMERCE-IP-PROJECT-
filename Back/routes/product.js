@@ -2,7 +2,6 @@ const express = require('express');
 const auth = require('../middlewares/auth');
 const router = express.Router();
 const productService = require('../services/product');
-const upload = require('../uploads/uploads');
 const mongoose = require('mongoose');
 const upload = require('../uploads/cloudinary');
 
