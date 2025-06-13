@@ -4,6 +4,7 @@ const router = express.Router();
 const productService = require('../services/product');
 const upload = require('../uploads/uploads');
 const mongoose = require('mongoose');
+const upload = require('../uploads/cloudinary');
 
 
 // Get product by ID (Protected)
@@ -40,16 +41,13 @@ router.get('/all', async (req, res) => {
 router.post('/upload/multiple', upload.array('images', 10), (req, res) => {
   try {
     if (!req.files || req.files.length === 0) {
-      console.error('No files received');
       return res.status(400).json({ error: 'No files uploaded' });
     }
 
-    console.log('Uploaded files:', req.files);
-
-    const filePaths = req.files.map((file) => `/uploads/${file.filename}`);
-    res.json({ success: true, imageUrls: filePaths });
+    const imageUrls = req.files.map(file => file.path); // Cloudinary gives secure URL in `file.path`
+    res.json({ success: true, imageUrls });
   } catch (err) {
-    console.error('Upload error:', err);
+    console.error('Cloudinary upload error:', err);
     res.status(500).json({ error: 'Upload failed' });
   }
 });
@@ -133,6 +131,38 @@ router.get('/:id', async (req, res) => {
     res.status(400).json({ success: false, error: error.message });
   }
 });
+router.get('/products', async (req, res) => {
+  const searchQuery = req.query.search || '';
+
+  try {
+    const products = await Product.aggregate([
+      {
+        $lookup: {
+          from: "categories",          // the collection name for categories
+          localField: "category",      // field in Product that references category
+          foreignField: "_id",         // field in categories to match
+          as: "category"
+        }
+      },
+      { $unwind: { path: "$category", preserveNullAndEmptyArrays: true } }, // unwind category array
+
+      {
+        $match: {
+          $or: [
+            { name: { $regex: searchQuery, $options: 'i' } },
+            { shortDesc: { $regex: searchQuery, $options: 'i' } },
+            { "category.name": { $regex: searchQuery, $options: 'i' } }
+          ]
+        }
+      }
+    ]);
+
+    res.json({ success: true, data: products });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Search failed", error: err.message });
+  }
+});
+
 
 
 

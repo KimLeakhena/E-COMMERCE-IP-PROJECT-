@@ -142,6 +142,24 @@ const remove = async (id) => {
   const deleted = await Product.findByIdAndDelete(id);
   return deleted;
 };
+router.get('/products', async (req, res) => {
+  const searchQuery = req.query.search || '';
+
+  try {
+    const products = await Product.find({
+      $or: [
+        { name: { $regex: searchQuery, $options: 'i' } },
+        { shortDesc: { $regex: searchQuery, $options: 'i' } }
+        // Add more fields as needed
+      ]
+    });
+
+    res.json({ success: true, data: products });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Search failed', error: err.message });
+  }
+});
+
 
 const getProductsByCategory = async (categoryId) => {
   try {
@@ -163,6 +181,27 @@ async function findById(id) {
   const product = await Product.findById(id);
   return product;
 }
+const products = await Product.aggregate([
+  {
+    $lookup: {
+      from: "categories",
+      localField: "category",
+      foreignField: "_id",
+      as: "category"
+    }
+  },
+  { $unwind: "$category" },
+  {
+    $match: {
+      $or: [
+        { name: { $regex: searchQuery, $options: 'i' } },
+        { shortDesc: { $regex: searchQuery, $options: 'i' } },
+        { "category.name": { $regex: searchQuery, $options: 'i' } }
+      ]
+    }
+  }
+]);
+
 
 
 
